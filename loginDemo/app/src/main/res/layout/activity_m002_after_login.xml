@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".M002AfterLogin">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"
+        />
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@id/guideline_right"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"/>
+
+
+    <ImageView
+        android:id="@+id/ImgAvataFace"
+        android:layout_width="119dp"
+        android:layout_height="126dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/user"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        app:layout_constraintStart_toEndOf="@id/guideline_left"
+        app:layout_constraintTop_toBottomOf="@id/txtLoginSuccess" />
+    <TextView
+        android:id="@+id/txtLoginSuccess"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/login_successful"
+        app:layout_constraintStart_toEndOf="@id/guideline_left"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        android:textSize="20sp"
+        />
+    <TextView
+        android:layout_marginTop="30dp"
+        android:id="@+id/txtEmail"
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideline_left"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/ImgAvataFace"
+        android:hint="@string/email"
+        />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideline_left"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/txtEmail"
+        android:hint="@string/name"
+        />
+    <TextView
+        android:id="@+id/txtDoB"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideline_left"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/txtName"
+        android:hint="@string/date_of_bird"
+        />
+    <TextView
+        android:id="@+id/txtGender"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideline_left"
+        app:layout_constraintEnd_toStartOf="@id/guideline_right"
+        app:layout_constraintTop_toBottomOf="@id/txtDoB"
+        android:hint="@string/gender"
+        />
+    <Button
+        app:layout_constraintStart_toStartOf="@id/guideline_left"
+        android:layout_marginTop="30dp"
+        android:text="@string/function"
+        android:background="@drawable/bg_id_pass_box"
+        app:layout_constraintTop_toBottomOf="@id/txtGender"
+        android:id="@+id/btnFunction"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <Button
+        app:layout_constraintEnd_toEndOf="@id/guideline_right"
+        android:layout_marginTop="30dp"
+        android:text="@string/logout"
+        android:background="@drawable/bg_id_pass_box"
+        app:layout_constraintTop_toBottomOf="@id/txtGender"
+        android:id="@+id/btnLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</android.support.constraint.ConstraintLayout>
