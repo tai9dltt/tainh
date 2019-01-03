@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context=".Activity.Register_Activity">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideLine_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="39dp" />
+    <android.support.constraint.Guideline
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideLine_top"
+        app:layout_constraintGuide_percent="0.1"
+        />
+    <android.support.constraint.Guideline
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/guideLine_right"
+        app:layout_constraintGuide_percent="0.9"
+        />
+    <TextView
+        android:id="@+id/register"
+        android:text="@string/ng_k"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        app:layout_constraintStart_toEndOf="@id/guideLine_left"
+        app:layout_constraintEnd_toStartOf="@id/guideLine_right"
+        app:layout_constraintTop_toBottomOf="@id/guideLine_top"
+
+        />
+    <EditText
+        android:drawableLeft="@drawable/ic_action_person"
+        android:id="@+id/txtUserName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/register"
+        app:layout_constraintStart_toEndOf="@id/guideLine_left"
+        app:layout_constraintEnd_toStartOf="@id/guideLine_right"
+        android:hint="@string/t_n_ng_nh_p"
+        android:layout_marginTop="30dp"
+        />
+    <EditText
+        android:id="@+id/txtPassword"
+        android:drawableLeft="@drawable/ic_action_pass"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txtUserName"
+        app:layout_constraintStart_toEndOf="@id/guideLine_left"
+        app:layout_constraintEnd_toStartOf="@id/guideLine_right"
+        android:hint="Mật Khẩu"
+        android:layout_marginTop="@dimen/margin_top_20dp"
+        android:inputType="textPassword"
+
+        />
+    <RadioGroup
+        android:id="@+id/radio_sex"
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideLine_left"
+        app:layout_constraintTop_toBottomOf="@id/txtPassword"
+        android:orientation="horizontal">
+        <RadioButton
+
+            android:id="@+id/rd_male"
+            android:text="Nam"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/rd_female"
+            android:text="Nữ"
+            app:layout_constraintTop_toBottomOf="@id/txtPassword"
+            app:layout_constraintStart_toEndOf="@id/rd_male"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/txtDob"
+        android:drawableLeft="@drawable/ic_action_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/radio_sex"
+        app:layout_constraintStart_toEndOf="@id/guideLine_left"
+        app:layout_constraintEnd_toStartOf="@id/guideLine_right"
+        android:hint="Ngày sinh"
+        android:layout_marginTop="10dp"
+        android:inputType="date"
+        />
+    <EditText
+        android:id="@+id/txtcmnd"
+        android:drawableLeft="@drawable/ic_action_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/txtDob"
+        app:layout_constraintStart_toEndOf="@id/guideLine_left"
+        app:layout_constraintEnd_toStartOf="@id/guideLine_right"
+        android:hint="Chứng minh nhân dân"
+        android:layout_marginTop="@dimen/margin_top_20dp"
+        android:inputType="number"
+        />
+
+    <Button
+        android:onClick="onClickLoginHandel"
+        android:id="@+id/btnOk"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="26dp"
+        android:text="Đồng ý"
+        app:layout_constraintStart_toEndOf="@id/guideLine_left"
+        app:layout_constraintTop_toBottomOf="@id/txtcmnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:onClick="onClickLoginHandel"
+        android:id="@+id/btnCancle"
+        android:layout_marginEnd="34dp"
+        android:layout_marginTop="26dp"
+        android:text="Thoát"
+        app:layout_constraintEnd_toStartOf="@id/guideLine_right"
+        app:layout_constraintTop_toBottomOf="@id/txtcmnd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"/>
+
+    <!--<ScrollView-->
+        <!--android:layout_width="338dp"-->
+        <!--android:layout_height="641dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/register">-->
+
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical" />-->
+    <!--</ScrollView>-->
+
+
+</android.support.constraint.ConstraintLayout>
+</ScrollView>

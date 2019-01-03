@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">demoOrderFood</string>
+    <string name="ng_k">Đăng Kí</string>
+    <string name="t_n_ng_nh_p">Tên đăng nhập</string>
+    <string name="trang_chu">Trang chủ</string>
+    <string name="thuc_don">Thực đơn</string>
+    <string name="nhan_vien">Nhân viên</string>
+    <string name="thong_ke">Thống kê</string>
+    <string name="cai_dat">Cài đặt</string>
+    <string name="ten_nhan_vien">Ten nhan vien</string>
+    <string name="open">Mở</string>
+    <string name="close">Đóng</string>
+    <string name="thembanAn">Thêm bàn ăn</string>
+    <string name="thumthudon">Thêm thực đơn</string>
+    <string name="ten_ban_an">Tên bàn ăn</string>
+    <string name="ng">Đồng ý</string>
+    <string name="add_success">Add successful</string>
+    <string name="add_fail">Add fail</string>
+    <string name="th_m_th_c_n">Thêm thực đơn</string>
+    <string name="t_n_m_n_n">Tên món ăn</string>
+    <string name="gi_ti_n">Giá tiền</string>
+    <string name="themthucdon">Thêm thực đơn</string>
+</resources>

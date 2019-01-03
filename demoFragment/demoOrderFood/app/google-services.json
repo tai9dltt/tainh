@@ -1,0 +1,55 @@
+ {
+  "project_info": {
+    "project_number": "1083180966994",
+    "firebase_url": "https://demofirst-1c258.firebaseio.com",
+    "project_id": "demofirst-1c258",
+    "storage_bucket": "demofirst-1c258.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083180966994:android:9de1b397c8b68364",
+        "android_client_info": {
+          "package_name": "com.example.i_tainh.demoorderfood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083180966994-afpg6ihe5v77qejl072e6cdeuau329la.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.i_tainh.demoorderfood",
+            "certificate_hash": "8705f2cc750067812b7857845a2284bba186fe33"
+          }
+        },
+        {
+          "client_id": "1083180966994-8fr1e8j5n8p6bm5a1pa6l2g6802k0m01.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKKDe34nGTtIv9lLvgCy4mM_OXpjz1KuY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083180966994-8fr1e8j5n8p6bm5a1pa6l2g6802k0m01.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

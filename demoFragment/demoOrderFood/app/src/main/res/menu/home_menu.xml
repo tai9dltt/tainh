@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+   <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/it_home"
+        android:title="@string/trang_chu"
+        android:icon="@drawable/trangchu"
+        android:checked="true"
+        />
+    <item
+        android:id="@+id/thuc_don"
+        android:title="@string/thuc_don"
+        android:icon="@drawable/logodangnhap"
+        />
+    <item
+        android:id="@+id/nhan_vien"
+        android:title="@string/nhan_vien"
+        android:icon="@drawable/nhanvien"
+        />
+    <item
+        android:id="@+id/thong_ke"
+        android:title="@string/thong_ke"
+        android:icon="@drawable/thongke"
+        />
+    <item
+        android:id="@+id/cai_dat"
+        android:title="@string/cai_dat"
+        android:icon="@drawable/caidat"
+        />
+   </group>
+</menu>

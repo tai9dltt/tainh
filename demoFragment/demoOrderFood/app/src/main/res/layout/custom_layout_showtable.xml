@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_margin="16dp"
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_gravity="center"
+    >
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideLine_gripLayout_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideLine_gripLayout_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+     />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideLine_gripLayout_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="165dp" />
+
+    <TextView
+        android:layout_gravity="center"
+        android:gravity="center"
+        app:layout_constraintTop_toBottomOf="@+id/guideLine_gripLayout_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:id="@+id/txt_tableName"
+        app:layout_constraintStart_toEndOf="@id/guideLine_gripLayout_left"
+        />
+
+    <ImageView
+        app:layout_constraintStart_toEndOf="@id/guideLine_gripLayout_left"
+        app:layout_constraintEnd_toStartOf="@id/guideLine_gripLayout_right"
+        android:foregroundGravity="center"
+        android:id="@+id/img_tableFalse"
+        android:src="@drawable/banan"
+        android:layout_width="@dimen/size"
+        android:layout_height="@dimen/size"
+        app:layout_constraintTop_toBottomOf="@id/txt_tableName"
+/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/img_goimon"
+            android:src="@drawable/goimon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_7dp"
+            android:visibility="invisible"
+
+            />
+
+        <ImageView
+            android:id="@+id/img_thanhToan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/thanhtoan"
+            android:layout_marginLeft="@dimen/margin_7dp"
+
+            android:visibility="invisible"
+
+
+            />
+        <ImageView
+            android:id="@+id/img_hide"
+            android:src="@drawable/anbutton"
+            android:layout_below="@id/img_tableFalse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_7dp"
+            android:visibility="invisible"
+
+            />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

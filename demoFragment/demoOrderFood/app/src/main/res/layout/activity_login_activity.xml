@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout >
+    <data>
+        <variable
+            name="username"
+            type="com.example.i_tainh.demoorderfood.entity.Account"/>
+
+    </data>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.Login_activity"
+    android:background="@drawable/bg">
+
+
+    <android.support.constraint.Guideline
+        app:layout_constraintGuide_percent="0.1"
+        android:id="@+id/guideLine_left_login"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+    <android.support.constraint.Guideline
+        app:layout_constraintGuide_percent="0.9"
+        android:id="@+id/guideLine_right_login"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <android.support.constraint.Guideline
+        android:id="@+id/guideLine_top_login"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/textView_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        app:layout_constraintTop_toBottomOf="@id/guideLine_top_login"
+        android:textSize="35sp"
+        app:layout_constraintStart_toEndOf="@id/guideLine_left_login"
+        app:layout_constraintEnd_toStartOf="@id/guideLine_right_login"
+        />
+
+    <EditText
+
+        android:drawableLeft="@drawable/ic_action_person"
+        android:singleLine="true"
+        android:id="@+id/txt_Username_login"
+        android:layout_marginTop="30dp"
+        android:hint=" Username"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideLine_left_login"
+        app:layout_constraintEnd_toStartOf="@id/guideLine_right_login"
+        app:layout_constraintTop_toBottomOf="@id/textView_login" />
+
+
+    <EditText
+
+        android:drawableLeft="@drawable/ic_action_pass"
+        android:singleLine="true"
+        android:id="@+id/txt_Password_login"
+        android:layout_marginTop="30dp"
+        android:hint=" Password"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideLine_left_login"
+        app:layout_constraintEnd_toStartOf="@id/guideLine_right_login"
+        app:layout_constraintTop_toBottomOf="@id/txt_Username_login"
+        android:inputType="textPassword"/>
+
+    <Button
+        android:onClick="demoLogin"
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:layout_marginTop="40sp"
+        app:layout_constraintStart_toEndOf="@id/guideLine_left_login"
+        app:layout_constraintEnd_toStartOf="@id/guideLine_right_login"
+        app:layout_constraintTop_toBottomOf="@id/txt_Password_login"
+        />
+
+    <TextView
+        android:onClick="goLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_top_20dp"
+        android:text="New here? Sign Up"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@id/guideLine_right_login"
+        app:layout_constraintStart_toEndOf="@id/guideLine_left_login"
+        app:layout_constraintTop_toBottomOf="@id/btn_login" />
+</android.support.constraint.ConstraintLayout>
+
+</layout>

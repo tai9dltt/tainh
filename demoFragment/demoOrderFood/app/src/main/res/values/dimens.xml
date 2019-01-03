@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_top_20dp">20dp</dimen>
+    <string name="nhap_ten_dang_nhap">Vui lòng nhập tên đăng nhập</string>
+    <string name="nhap_mk">Vui lòng nhập mật khẩu</string>
+    <string name="nhap_ngay_sinh">Vui lòng nhập ngày sinh</string>
+    <string name="nhap_cmnd">Vui lòng nhập số chứng minh nhân dân</string>
+    <dimen name="size190dp">190dp</dimen>
+    <dimen name="margin_7dp">7dp</dimen>
+    <dimen name="margin_8dp">8dp</dimen>
+    <dimen name="margin_5dp">5dp</dimen>
+    <dimen name="size">100dp</dimen>
+</resources>

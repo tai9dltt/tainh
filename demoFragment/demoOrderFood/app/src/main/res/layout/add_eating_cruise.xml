@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+    android:id="@+id/ed_themthudon"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="@string/th_m_th_c_n"
+    android:textStyle="bold"
+    android:textSize="24sp"/>
+
+
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideLine1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.48"
+        android:orientation="vertical"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideLine2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintGuide_percent="0.52"
+        android:orientation="vertical"/>
+
+    <EditText
+        android:layout_marginTop="@dimen/margin_top_20dp"
+        android:id="@+id/ed_name"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/t_n_m_n_n"
+        app:layout_constraintEnd_toStartOf="@id/guideLine1"
+        app:layout_constraintTop_toBottomOf="@id/ed_themthudon"
+        />
+    <EditText
+
+        android:id="@+id/ed_price"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/gi_ti_n"
+        app:layout_constraintEnd_toStartOf="@id/guideLine1"
+        app:layout_constraintTop_toBottomOf="@id/ed_name"
+        android:layout_marginTop="@dimen/margin_top_20dp"
+        />
+    <Spinner
+        android:layout_marginRight="@dimen/margin_8dp"
+        android:layout_marginTop="@dimen/margin_top_20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/ed_price"
+        app:layout_constraintEnd_toStartOf="@id/btn_add_cruise"
+        >
+
+    </Spinner>
+    <ImageButton
+        android:layout_marginTop="@dimen/margin_top_20dp"
+        android:id="@+id/btn_add_cruise"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/add"
+        app:layout_constraintTop_toBottomOf="@id/ed_price"
+        app:layout_constraintEnd_toStartOf="@id/guideLine1"
+        />
+
+    <ImageView
+        android:layout_width="170dp"
+        android:layout_height="180dp"
+        android:src="@drawable/backgroundheader"
+        app:layout_constraintStart_toEndOf="@id/guideLine2"
+        app:layout_constraintTop_toBottomOf="@id/ed_themthudon"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        app:layout_constraintTop_toBottomOf="@id/btn_add_cruise"
+        >
+        <Button
+            android:id="@+id/btn_Add_Ok"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ok"
+            android:layout_weight="1"
+            android:layout_marginStart="@dimen/margin_top_20dp"
+            />
+        <Button
+            android:id="@+id/btn_cancel_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:layout_weight="1"
+            android:layout_marginEnd="@dimen/margin_top_20dp"
+
+            />
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
