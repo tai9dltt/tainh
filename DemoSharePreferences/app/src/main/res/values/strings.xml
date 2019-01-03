@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">DemoSharePreferences</string>
+    <string name="save_data">Save Data</string>
+    <string name="remove_data">Remove Data</string>
+    <string name="read_data">Read Data</string>
+    <string name="remove_all">Remove all</string>
+</resources>
