@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -26,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        mAuth = FirebaseAuth.getInstance();
 
         email1 = findViewById(R.id.register_email);
         pass1 = findViewById(R.id.register_pass);
@@ -40,6 +43,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+
     private void Register(){
         String email = email1.getText().toString();
         String password = pass1.getText().toString();
@@ -50,8 +54,9 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(RegisterActivity.this, "Register successfull.", Toast.LENGTH_SHORT).show();
-//                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-//                                startActivity(intent);
+                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                startActivity(intent);
+                                finish();
 
                             } else {
                                 // If sign in fails, display a message to the user.
