@@ -17,30 +17,27 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity" />
+        <activity android:name=".Activity.MainActivity" />
 
-        <service android:name=".MyFirebaseInstanceIDService">
+        <service android:name=".Activity.MyFirebaseInstanceIDService">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
-        <service android:name=".MyFirebaseMessagingService">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
 
         <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login">
+            android:name=".Activity.LoginActivity"
+            android:label="@string/title_activity_login"></activity>
+        <activity android:name=".Activity.RegisterActivity" />
+        <activity android:name=".Activity.ChatActivity" />
+        <activity android:name=".Activity.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".ChatActivity"></activity>
+        <activity android:name=".Activity.M002Activity"></activity>
     </application>
 
 </manifest>

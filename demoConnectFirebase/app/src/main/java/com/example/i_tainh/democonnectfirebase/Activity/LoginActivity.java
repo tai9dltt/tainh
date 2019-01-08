@@ -1,34 +1,15 @@
-package com.example.i_tainh.democonnectfirebase;
+package com.example.i_tainh.democonnectfirebase.Activity;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.app.LoaderManager.LoaderCallbacks;
 
-import android.content.CursorLoader;
-import android.content.Loader;
-import android.database.Cursor;
-import android.net.Uri;
-import android.os.AsyncTask;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.text.TextUtils;
-import android.text.style.UpdateLayout;
 import android.util.Log;
-import android.util.Patterns;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.i_tainh.democonnectfirebase.Model.User;
+import com.example.i_tainh.democonnectfirebase.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -52,12 +34,6 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
-
-import static android.Manifest.permission.READ_CONTACTS;
-
 /**
  * A login screen that offers login via email/password.
  */
@@ -73,6 +49,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText textInputPassword;
     private EditText textInputEmail;
     private Button moveToChat;
+    private ProgressDialog progressDialog;
 
     private SignInButton googleButton;
     FirebaseAuth mAuth;
@@ -91,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         googleButton.setSize(SignInButton.SIZE_STANDARD);
         setGooglePlusButtonText(googleButton,"Sign in with google");
 
-
+        progressDialog = new ProgressDialog(this);
 
 
         // [START config_signin]
@@ -191,6 +168,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void Login(){
+        progressDialog.setTitle("Login");
+        progressDialog.setMessage("Please wait for sign in.");
+        progressDialog.show();
         String email = textInputEmail.getText().toString();
         String  password = textInputPassword.getText().toString();
         mAuth.signInWithEmailAndPassword(email, password)
@@ -202,9 +182,9 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             writeUserToDb();
                             Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT);
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, M002Activity.class);
                             startActivity(intent);
-                            finish();
+
 
 
                         } else {
@@ -215,7 +195,7 @@ public class LoginActivity extends AppCompatActivity {
 
                         }
 
-                        // ...
+                        progressDialog.dismiss();
                     }
                 });
     }

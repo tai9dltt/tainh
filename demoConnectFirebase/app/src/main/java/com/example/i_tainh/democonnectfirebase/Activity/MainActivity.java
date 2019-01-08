@@ -1,4 +1,4 @@
-package com.example.i_tainh.democonnectfirebase;
+package com.example.i_tainh.democonnectfirebase.Activity;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -7,10 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.google.android.gms.auth.api.Auth;
+import com.example.i_tainh.democonnectfirebase.R;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

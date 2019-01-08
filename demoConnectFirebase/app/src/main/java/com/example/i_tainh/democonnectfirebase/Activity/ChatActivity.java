@@ -1,10 +1,12 @@
-package com.example.i_tainh.democonnectfirebase;
+package com.example.i_tainh.democonnectfirebase.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.i_tainh.democonnectfirebase.R;
 
 public class ChatActivity extends AppCompatActivity {
 

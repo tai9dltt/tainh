@@ -1,4 +1,4 @@
-package com.example.i_tainh.democonnectfirebase;
+package com.example.i_tainh.democonnectfirebase.Activity;
 
 
 import android.app.NotificationManager;
@@ -10,6 +10,8 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
+import com.example.i_tainh.democonnectfirebase.Activity.MainActivity;
+import com.example.i_tainh.democonnectfirebase.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
