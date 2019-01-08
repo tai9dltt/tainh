@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -133,71 +134,45 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-    // [END onactivityresult]
-
-//    public void loginHandel(View view){
-//        switch (view.getId()){
-//            case R.id.login:
-//                loginButton.setOnClickListener(new OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Login();
-//                    }
-//                });
-//                break;
-//            case R.id.register:
-//                registerBuston.setOnClickListener(new OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
-//                        startActivity(intent);
-//                    }
-//                });
-//                break;
-//            case R.id.sign_in_button_google:
-//                googleButton.setOnClickListener(new OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                       onActivityResult(0,0,null);
-//                    }
-//                });
-//
-//        }
-//    }
-
-
 
     private void Login(){
-        progressDialog.setTitle("Login");
-        progressDialog.setMessage("Please wait for sign in.");
-        progressDialog.show();
+
         String email = textInputEmail.getText().toString();
         String  password = textInputPassword.getText().toString();
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "signInWithEmail:success");
-                            writeUserToDb();
-                            Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT);
-                            Intent intent = new Intent(LoginActivity.this, M002Activity.class);
-                            startActivity(intent);
+        if(TextUtils.isEmpty(email)){
+            Toast.makeText(LoginActivity.this, "Please write your email",Toast.LENGTH_SHORT).show();
+        }
+        if (TextUtils.isEmpty(password)){
+            Toast.makeText(LoginActivity.this, "Please write your password",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            progressDialog.setTitle("Login");
+            progressDialog.setMessage("Please wait for sign in.");
+            progressDialog.show();
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                writeUserToDb();
+                                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT);
+                                Intent intent = new Intent(LoginActivity.this, M002Activity.class);
+                                startActivity(intent);
 
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(LoginActivity.this, "Email or password wrongs",
+                                        Toast.LENGTH_SHORT).show();
 
+                            }
 
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                    Toast.LENGTH_SHORT).show();
-
+                            progressDialog.dismiss();
                         }
-
-                        progressDialog.dismiss();
-                    }
-                });
+                    });
+        }
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {

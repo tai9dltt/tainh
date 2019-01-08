@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Activity.SettingAcctivity">
+
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1"
+        android:id="@+id/guilde_left"/>
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9"
+        android:id="@+id/guilde_right"/>
+    <android.support.constraint.Guideline
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05"
+        android:id="@+id/guilde_top"/>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_user"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:src="@drawable/bg2"
+        app:layout_constraintStart_toEndOf="@id/guilde_left"
+        app:layout_constraintEnd_toStartOf="@id/guilde_right"
+        app:layout_constraintTop_toBottomOf="@id/guilde_top"
+        />
+    <TextView
+        android:id="info_username"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:text="User name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guilde_left"
+        app:layout_constraintEnd_toStartOf="@id/guilde_right"
+        app:layout_constraintTop_toBottomOf="@id/img_user"
+        android:layout_marginTop="20dp"
+         />
+    <TextView
+        android:textSize="18sp"
+
+        android:text="User name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guilde_left"
+        app:layout_constraintEnd_toStartOf="@id/guilde_right"
+
+        android:layout_marginTop="20dp"
+        />
+
+</android.support.constraint.ConstraintLayout>

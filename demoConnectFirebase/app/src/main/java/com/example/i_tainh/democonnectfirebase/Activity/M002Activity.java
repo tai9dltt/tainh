@@ -40,8 +40,6 @@ public class M002Activity extends AppCompatActivity {
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("MyChatApp");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
 
     }

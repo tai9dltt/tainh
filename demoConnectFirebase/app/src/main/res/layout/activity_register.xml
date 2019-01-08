@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.RegisterActivity">
+    tools:context=".Activity.RegisterActivity"
+    android:padding="20dp">
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,6 +16,11 @@
         android:textSize="30sp"
         android:layout_marginTop="20dp"
         />
+    <EditText
+        android:hint="Enter Name"
+        android:id="@+id/register_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <EditText
         android:id="@+id/register_email"
         android:padding="10dp"

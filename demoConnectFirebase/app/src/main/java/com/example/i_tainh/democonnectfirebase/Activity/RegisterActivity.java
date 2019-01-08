@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +21,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     private Button register;
-    private EditText pass1;
+    private EditText pass1, name1;
     private EditText email1;
     private ProgressDialog loadingBar;
     @Override
@@ -31,6 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
         email1 = findViewById(R.id.register_email);
         pass1 = findViewById(R.id.register_pass);
+        name1 = findViewById(R.id.register_name);
+
         register = findViewById(R.id.btnRegister);
 
         register.setOnClickListener(new View.OnClickListener() {
@@ -43,12 +46,24 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
-    private void Register(){
-        loadingBar.setTitle("Create new account");
-        loadingBar.setMessage("Please wait, while we are creating account for you.");
-        loadingBar.show();
-        String email = email1.getText().toString();
-        String password = pass1.getText().toString();
+    private void Register() {
+
+        String name = name1.getText().toString().trim();
+        String email = email1.getText().toString().trim();
+        String password = pass1.getText().toString().trim();
+
+        if (TextUtils.isEmpty(name)) {
+            Toast.makeText(RegisterActivity.this, "Please write your name", Toast.LENGTH_SHORT).show();
+        }
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(RegisterActivity.this, "Please write your email", Toast.LENGTH_SHORT).show();
+        }
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(RegisterActivity.this, "Please write your password", Toast.LENGTH_SHORT).show();
+        } else {
+            loadingBar.setTitle("Create new account");
+            loadingBar.setMessage("Please wait, while we are creating account for you.");
+            loadingBar.show();
 
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -68,5 +83,6 @@ public class RegisterActivity extends AppCompatActivity {
                         }
                     });
 
+        }
     }
 }
