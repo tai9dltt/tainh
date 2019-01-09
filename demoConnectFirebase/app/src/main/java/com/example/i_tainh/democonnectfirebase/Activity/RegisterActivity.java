@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -24,6 +27,9 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText pass1, name1;
     private EditText email1;
     private ProgressDialog loadingBar;
+    private DatabaseReference storeUserDefault;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void Register() {
 
-        String name = name1.getText().toString().trim();
+        final String name = name1.getText().toString().trim();
         String email = email1.getText().toString().trim();
         String password = pass1.getText().toString().trim();
 
@@ -70,12 +76,27 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(RegisterActivity.this, "Register successfull.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                                startActivity(intent);
-                                finish();
+                                String current_user_id = mAuth.getCurrentUser().getUid();
+                                storeUserDefault = FirebaseDatabase.getInstance().getReference().child("Users").child(current_user_id);
+                                storeUserDefault.child("user_name").setValue(name);
+                                storeUserDefault.child("user_status").setValue("I am using app chat");
+                                storeUserDefault.child("user_image").setValue("default_profile");
+                                storeUserDefault.child("user_thumb_image").setValue("default_image")
+                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                if(task.isSuccessful()){
 
-                            } else {
+//                                Toast.makeText(RegisterActivity.this, "Register successfull.", Toast.LENGTH_SHORT).show();
+                                                    Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                    startActivity(intent);
+                                                    finish();
+                                                }
+                                            }
+                                        });
+
+                                } else {
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(RegisterActivity.this, "Register failed.", Toast.LENGTH_SHORT).show();
                             }

@@ -28,14 +28,7 @@ public class MainActivity extends AppCompatActivity {
     buttonSub = findViewById(R.id.btnSubr);
     logoutGG = findViewById(R.id.logoutButton);
 
-        moveToChat = findViewById(R.id.btn_moveToChat);
-        moveToChat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ChatActivity.class);
-                startActivity(intent);
-            }
-        });
+
 
     buttonSub.setOnClickListener(new View.OnClickListener() {
         @Override

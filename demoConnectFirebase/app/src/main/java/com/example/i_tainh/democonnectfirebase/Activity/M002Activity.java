@@ -77,6 +77,11 @@ public class M002Activity extends AppCompatActivity {
             mAuth.signOut();
             LogoutUser();
         }
+
+        if(item.getItemId() == R.id.main_account_settings_button){
+            Intent setting = new Intent(M002Activity.this,SettingAcctivity.class);
+            startActivity(setting);
+        }
         return true;
     }
 

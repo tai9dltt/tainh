@@ -156,7 +156,7 @@ public class LoginActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "signInWithEmail:success");
-                                writeUserToDb();
+//                                writeUserToDb();
                                 Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT);
                                 Intent intent = new Intent(LoginActivity.this, M002Activity.class);
                                 startActivity(intent);
@@ -219,14 +219,14 @@ public class LoginActivity extends AppCompatActivity {
     }
     // [END signin]
 
-    private void writeUserToDb(){
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
-        User user = new User(currentUser.getEmail());
-
-        mDatabase.child("users").child(currentUser.getUid()).setValue(user);
-        Log.d("Test1", mDatabase.child("users").child(currentUser.getUid()).setValue(user).toString());
-    }
+//    private void writeUserToDb(){
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+//        User user = new User(currentUser.getEmail());
+//
+//        mDatabase.child("users").child(currentUser.getUid()).setValue(user);
+//        Log.d("Test1", mDatabase.child("users").child(currentUser.getUid()).setValue(user).toString());
+//    }
 
 
 
