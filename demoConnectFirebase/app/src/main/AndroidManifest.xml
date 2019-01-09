@@ -41,7 +41,8 @@
         </activity>
         <activity android:name=".Activity.M002Activity" />
         <activity android:name=".Activity.SettingAcctivity"></activity>
-
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat"/>
     </application>
 
 </manifest>
