@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.example.i_tainh.democonnectfirebase.Activity.MainActivity;
 import com.example.i_tainh.democonnectfirebase.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
@@ -42,7 +41,7 @@ public class MyFirebaseInstanceIDService extends FirebaseMessagingService {
 
 
     private void sendNotifycation(String messageBody) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, M002Activity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
         startActivity(intent);

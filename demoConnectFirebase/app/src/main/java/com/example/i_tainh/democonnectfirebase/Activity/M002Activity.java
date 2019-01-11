@@ -82,6 +82,11 @@ public class M002Activity extends AppCompatActivity {
             Intent setting = new Intent(M002Activity.this,SettingAcctivity.class);
             startActivity(setting);
         }
+
+        if(item.getItemId() == R.id.main_all_user_button){
+            Intent intent = new Intent(M002Activity.this, AllUserActivity.class);
+            startActivity(intent);
+        }
         return true;
     }
 

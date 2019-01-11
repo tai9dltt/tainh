@@ -9,6 +9,12 @@
         app:showAsAction="never">
     </item>
 
+    <item
+        android:title="All users"
+        android:id="@+id/main_all_user_button"
+        app:showAsAction="never">
+
+    </item>
 
     <item
         android:title="Logout"

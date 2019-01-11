@@ -1,6 +1,8 @@
 package com.example.i_tainh.democonnectfirebase.Activity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.i_tainh.democonnectfirebase.R;
+import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +32,14 @@ import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import id.zelory.compressor.Compressor;
+
 
 public class SettingAcctivity extends AppCompatActivity {
 
@@ -42,7 +52,9 @@ public class SettingAcctivity extends AppCompatActivity {
     private DatabaseReference getUserReference;
     private FirebaseAuth mAuth;
     private StorageReference storeProfileImageStoreageRef;
-
+    ProgressDialog loadingBar;
+    Bitmap thumbBitmap = null;
+    private StorageReference thumbImageRef;
 
 
     @Override
@@ -54,7 +66,8 @@ public class SettingAcctivity extends AppCompatActivity {
         String online_user_id = mAuth.getCurrentUser().getUid();
         getUserReference = FirebaseDatabase.getInstance().getReference().child("Users").child(online_user_id);
         storeProfileImageStoreageRef = FirebaseStorage.getInstance().getReference().child("Profile_Images");
-
+        loadingBar = new ProgressDialog(this);
+        thumbImageRef = FirebaseStorage.getInstance().getReference().child("Thumb_Images");
 
         settingDisplayImage = (CircleImageView) findViewById(R.id.img_user);
         settingDisplayName = findViewById(R.id.textViewUsername);
@@ -90,6 +103,13 @@ public class SettingAcctivity extends AppCompatActivity {
                 startActivityForResult(intent,GALLAY_PICK);
             }
         });
+        settingChangeStatusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SettingAcctivity.this, StatusActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -97,6 +117,7 @@ public class SettingAcctivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == GALLAY_PICK && resultCode == RESULT_OK && data != null){
             Uri imageUri = data.getData();
+            Log.d("imageURI", imageUri.toString());
             CropImage.activity()
                     .setGuidelines(CropImageView.Guidelines.ON)
                     .setAspectRatio(1,1)
@@ -105,20 +126,66 @@ public class SettingAcctivity extends AppCompatActivity {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
             if (resultCode == RESULT_OK) {
+                loadingBar.setMessage("Updating Profile image ... ");
+                loadingBar.show();
                  Uri resultUri = result.getUri();
 
-                String user_id = mAuth.getCurrentUser().getUid();
-                StorageReference  filePath = storeProfileImageStoreageRef.child(user_id + ".jpg");
+                File thumb_filePathUri = new File(resultUri.getPath());
 
-                filePath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+
+                String user_id = mAuth.getCurrentUser().getUid();
+
+                try{
+                    thumbBitmap = new Compressor(this).setMaxHeight(200).setMaxHeight(200).setQuality(50).compressToBitmap(thumb_filePathUri);
+
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                thumbBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream);
+                final byte[] thumb_byte = byteArrayOutputStream.toByteArray();
+
+                 StorageReference  filePath = storeProfileImageStoreageRef.child(user_id + ".jpg");
+
+                final StorageReference thumb_filePath = thumbImageRef.child(user_id + ".jpg");
+
+
+
+                filePath.putFile(resultUri)
+                        .addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if(task.isSuccessful()){
                             Toast.makeText(SettingAcctivity.this,"Saving your profile image to firebase",Toast.LENGTH_SHORT).show();
 
-                            String downloadUrl = task.getResult().getStorage().getDownloadUrl().toString();
+                            final String downloadUrl = task.getResult().getStorage().getDownloadUrl().getResult().toString();
+
+                            UploadTask uploadTask = thumb_filePath.putBytes(thumb_byte);
+                            uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                                    String thumb_downloadUrl = task.getResult().getStorage().getDownloadUrl().getResult().toString();
+                                    Log.d("UrlThumbImage", thumb_downloadUrl);
+                                    if (task.isSuccessful()){
+                                        Map update_user_data = new HashMap();
+                                        update_user_data.put("user_image",downloadUrl);
+                                        update_user_data.put("user_thumb_image",thumb_downloadUrl);
+
+                                        getUserReference.updateChildren(update_user_data)
+                                                .addOnCompleteListener(new OnCompleteListener() {
+                                                    @Override
+                                                    public void onComplete(@NonNull Task task) {
+                                                        Toast.makeText(SettingAcctivity.this,"Image upload successful",Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                    }
+                                }
+                            });
+
                             Log.d("downloadUrl", downloadUrl);
-                            getUserReference.child("user_image").setValue(downloadUrl).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            getUserReference.child("user_image").setValue(downloadUrl)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             Toast.makeText(SettingAcctivity.this,"Image upload successful",Toast.LENGTH_SHORT).show();
@@ -130,8 +197,12 @@ public class SettingAcctivity extends AppCompatActivity {
                         }
                     }
                 });
-            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Exception error = result.getError();
+
+
+                }else{
+                Toast.makeText(SettingAcctivity.this,"Something wrong, try again",Toast.LENGTH_SHORT).show();
+
+
             }
         }
 
