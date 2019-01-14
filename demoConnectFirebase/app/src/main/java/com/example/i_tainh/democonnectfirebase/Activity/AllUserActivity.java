@@ -1,6 +1,7 @@
 package com.example.i_tainh.democonnectfirebase.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -48,7 +49,10 @@ public class AllUserActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("All Users");
 
         allUsersList.setLayoutManager(new LinearLayoutManager(this));
+
+
         allDatabaseUserReference = FirebaseDatabase.getInstance().getReference().child("Users");
+        allDatabaseUserReference.keepSynced(true);
 
         FirebaseRecyclerOptions<AllUser> options = new FirebaseRecyclerOptions.Builder<AllUser>()
                 .setQuery(allDatabaseUserReference, AllUser.class).build();
@@ -63,11 +67,24 @@ public class AllUserActivity extends AppCompatActivity {
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull AllUserViewHoldel holder, int position, @NonNull AllUser model) {
+            protected void onBindViewHolder(@NonNull AllUserViewHoldel holder, final int position, @NonNull AllUser model) {
                 String imgUrl = model.getUser_image();
+//                String imgThumb = model.getUser_thumb_image();
+
                 Picasso.get().load(imgUrl).into(holder.image);
+
                 holder.name.setText(model.getUser_name());
                 holder.status.setText(model.getUser_status());
+
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String visit_user_id = getRef(position).getKey();
+                        Intent intent = new Intent(AllUserActivity.this,ProfileActivity.class);
+                        intent.putExtra("Visit_user_id", visit_user_id);
+                        startActivity(intent);
+                    }
+                });
 
             }
         };
@@ -81,13 +98,13 @@ public class AllUserActivity extends AppCompatActivity {
         TextView status;
         CircleImageView image;
 
+
         public AllUserViewHoldel(@NonNull View itemView) {
             super(itemView);
             name = itemView.findViewById(R.id.all_user_username);
             status = itemView.findViewById(R.id.all_user_userStatus);
-             image = itemView.findViewById(R.id.all_user_profile_image);
+            image = itemView.findViewById(R.id.all_user_profile_image);
         }
-
     }
     @Override
     protected void onStart() {
@@ -102,11 +119,7 @@ public class AllUserActivity extends AppCompatActivity {
         Log.d("onStop", "onStop: stop users list");
     }
 
-
 }
-
-
-
 
 
 

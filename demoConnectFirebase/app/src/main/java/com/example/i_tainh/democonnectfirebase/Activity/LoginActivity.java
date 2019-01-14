@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,8 +33,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 /**
  * A login screen that offers login via email/password.
@@ -55,11 +63,14 @@ public class LoginActivity extends AppCompatActivity {
     private SignInButton googleButton;
     FirebaseAuth mAuth;
 
+
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_login);
+
 
         loginButton = findViewById(R.id.login);
         registerBuston = findViewById(R.id.register);
@@ -67,9 +78,13 @@ public class LoginActivity extends AppCompatActivity {
         textInputPassword = findViewById(R.id.password);
         googleButton = findViewById(R.id.sign_in_button_google);
         googleButton.setSize(SignInButton.SIZE_STANDARD);
-        setGooglePlusButtonText(googleButton,"Sign in with google");
 
+
+
+        setGooglePlusButtonText(googleButton,"Sign in with google");
         progressDialog = new ProgressDialog(this);
+
+
 
 
         // [START config_signin]

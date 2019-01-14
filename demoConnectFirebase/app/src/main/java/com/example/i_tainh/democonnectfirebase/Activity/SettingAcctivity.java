@@ -159,13 +159,14 @@ public class SettingAcctivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             Toast.makeText(SettingAcctivity.this,"Saving your profile image to firebase",Toast.LENGTH_SHORT).show();
 
-                            final String downloadUrl = task.getResult().getStorage().getDownloadUrl().getResult().toString();
+                            final String downloadUrl = task.getResult().getMetadata().getReference().getDownloadUrl()+"";
 
                             UploadTask uploadTask = thumb_filePath.putBytes(thumb_byte);
                             uploadTask.addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                                 @Override
                                 public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                                    String thumb_downloadUrl = task.getResult().getStorage().getDownloadUrl().getResult().toString();
+
+                                    String thumb_downloadUrl = task.getResult().getMetadata().getReference().getDownloadUrl()+"";
                                     Log.d("UrlThumbImage", thumb_downloadUrl);
                                     if (task.isSuccessful()){
                                         Map update_user_data = new HashMap();

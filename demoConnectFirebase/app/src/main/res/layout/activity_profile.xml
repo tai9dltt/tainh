@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.ProfileActivity">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="280dp"
+        android:layout_gravity="center"
+        android:src="@drawable/p4"
+        android:id="@+id/profile_visit_user_image"
+        />
+    
+    <TextView
+        android:id="@+id/profile_visit_username"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Display Username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/profile_visit_user_status"
+        android:layout_marginTop="20dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Display User status"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/profile_visit_send_req_button"
+        android:layout_gravity="center"
+        android:layout_marginTop="80dp"
+        android:text="Send Friend Request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/profile_decline_friend_req_button"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Decline Friend Request"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        />
+
+
+</LinearLayout>
