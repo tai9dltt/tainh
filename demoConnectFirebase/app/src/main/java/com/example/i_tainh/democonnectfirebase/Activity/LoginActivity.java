@@ -27,6 +27,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
@@ -38,6 +39,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdReceiver;
 import com.google.firebase.storage.FirebaseStorage;
 import com.squareup.picasso.Picasso;
 
@@ -63,11 +66,14 @@ public class LoginActivity extends AppCompatActivity {
     private SignInButton googleButton;
     FirebaseAuth mAuth;
 
+    private DatabaseReference userReference;
+
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        userReference = FirebaseDatabase.getInstance().getReference().child("Users");
 
         setContentView(R.layout.activity_login);
 
@@ -169,18 +175,29 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "signInWithEmail:success");
-//                                writeUserToDb();
-                                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT);
-                                Intent intent = new Intent(LoginActivity.this, M002Activity.class);
-                                startActivity(intent);
+
+                                String online_user_id = mAuth.getCurrentUser().getUid();
+                                String DevicedToken = FirebaseInstanceId.getInstance().getToken();
+
+                                userReference.child(online_user_id).child("device_token").setValue(DevicedToken)
+                                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                            @Override
+                                            public void onSuccess(Void aVoid) {
+                                                Log.d(TAG, "signInWithEmail:success");
+                                                Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT);
+                                                Intent intent = new Intent(LoginActivity.this, M002Activity.class);
+                                                startActivity(intent);
+                                                finish();
+                                            }
+                                        });
+
+
 
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                Toast.makeText(LoginActivity.this, "Email or password wrongs",
-                                        Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "Email or password wrongs",Toast.LENGTH_SHORT).show();
+
 
                             }
 
@@ -202,6 +219,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());

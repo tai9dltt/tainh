@@ -123,8 +123,6 @@ public class AllUserActivity extends AppCompatActivity {
 
 
 
-
-
 //    public AllUserViewHoldel(@NonNull View itemView) {
 //            super(itemView);
 //            mView = itemView;

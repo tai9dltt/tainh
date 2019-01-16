@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -77,6 +78,8 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
                                 String current_user_id = mAuth.getCurrentUser().getUid();
+                                String DevicedToken = FirebaseInstanceId.getInstance().getToken();
+                                storeUserDefault.child("device_token").setValue(DevicedToken);
                                 storeUserDefault = FirebaseDatabase.getInstance().getReference().child("Users").child(current_user_id);
                                 storeUserDefault.child("user_name").setValue(name);
                                 storeUserDefault.child("user_status").setValue("I am using app chat");
