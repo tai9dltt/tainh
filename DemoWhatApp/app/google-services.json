@@ -1,0 +1,44 @@
+{
+  "project_info": {
+    "project_number": "912908174884",
+    "firebase_url": "https://demowhatapp-a294b.firebaseio.com",
+    "project_id": "demowhatapp-a294b",
+    "storage_bucket": "demowhatapp-a294b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912908174884:android:44f7f3e5d72beb12",
+        "android_client_info": {
+          "package_name": "com.example.demowhatapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912908174884-sl0q0npgtqf0hskcasaee0krt3u8spoq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.demowhatapp",
+            "certificate_hash": "8705f2cc750067812b7857845a2284bba186fe33"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAr9Q7iXPK03SIaoIl-4Jd4d2CdxFr2bCY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912908174884-odfeevm8mp39gsv9m2vvnppqqcrqvlbj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

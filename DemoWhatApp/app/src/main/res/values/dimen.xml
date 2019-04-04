@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="spac_8_dp">8dp</dimen>
+    <dimen name="spac_4_dp">4dp</dimen>
+    <dimen name="space_20_dp">20dp</dimen>
+
+</resources>
