@@ -3,12 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.GroupsFragment">
+    tools:context=".fragment.GroupsFragment"
+    android:layout_margin="@dimen/spac_4_dp">
 
     <!-- TODO: Update Group fragment layout -->
-    <TextView
+
+    <ListView
+        android:id="@+id/group_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Group fragment" />
+        android:layout_height="match_parent">
+    </ListView>
+
 
 </RelativeLayout>

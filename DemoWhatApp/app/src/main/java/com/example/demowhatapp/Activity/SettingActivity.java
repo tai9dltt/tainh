@@ -1,8 +1,8 @@
 package com.example.demowhatapp.Activity;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -14,8 +14,11 @@ import com.example.demowhatapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -47,6 +50,8 @@ public class SettingActivity extends AppCompatActivity {
         rootReference = FirebaseDatabase.getInstance().getReference();
 
         InitializeFields();
+
+        RetriveUserInfo();
 
     }
 
@@ -91,5 +96,40 @@ public class SettingActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    private void RetriveUserInfo(){
+        rootReference.child("Users").child(currentUserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists() && dataSnapshot.hasChild("name") && dataSnapshot.hasChild("image")){
+                    String retriveUserName = dataSnapshot.child("name").getValue().toString();
+                    String retriveUserStatus = dataSnapshot.child("status").getValue().toString();
+                    String retriveUserImage = dataSnapshot.child("image").getValue().toString();
+
+                    userName.setText(retriveUserName);
+                    userStatus.setText(retriveUserStatus);
+                }
+                else if(dataSnapshot.exists() && dataSnapshot.hasChild("name")){
+                    String retriveUserName = dataSnapshot.child("name").getValue().toString();
+                    String retriveUserStatus = dataSnapshot.child("status").getValue().toString();
+
+                    userName.setText(retriveUserName);
+                    userStatus.setText(retriveUserStatus);
+
+                }
+                else{
+                    //only edit user name in the first login
+//                    userName.setVisibility(View.VISIBLE);
+                    Toast.makeText(SettingActivity.this, "Please set & update your information", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }
