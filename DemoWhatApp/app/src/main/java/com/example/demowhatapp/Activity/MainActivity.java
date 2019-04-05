@@ -1,6 +1,7 @@
 package com.example.demowhatapp.Activity;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -19,6 +20,11 @@ import com.example.demowhatapp.R;
 import com.example.demowhatapp.TabsAccessorAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -35,6 +41,8 @@ public class MainActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
 
+    private DatabaseReference rootReference;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         currentUser = mAuth.getCurrentUser();
+        rootReference = FirebaseDatabase.getInstance().getReference();
 
         mToolbar = findViewById(R.id.main_app_bar);
         setSupportActionBar(mToolbar);
@@ -64,6 +73,30 @@ public class MainActivity extends AppCompatActivity {
         if (currentUser == null) {
             SendUserToLoginActivity();
         }
+        else{
+
+        }
+    }
+    public void VerifyUserExitsIntance(){
+        String currentUserID = mAuth.getCurrentUser().getUid();
+        rootReference.child(currentUserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child("name").exists()){
+                    Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+                    startActivity(intent);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
@@ -82,6 +115,8 @@ public class MainActivity extends AppCompatActivity {
 
         }
         if(item.getItemId() == R.id.main_setting_option){
+            Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+            startActivity(intent);
 
 
         }
