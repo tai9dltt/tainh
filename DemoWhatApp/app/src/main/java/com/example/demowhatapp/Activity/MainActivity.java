@@ -1,6 +1,6 @@
 package com.example.demowhatapp.Activity;
 
-import android.content.DialogInterface;
+
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,6 +30,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.Objects;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -59,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar = findViewById(R.id.main_app_bar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("WhatApps");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("WhatApps");
 
         myViewPager = findViewById(R.id.main_tabs_pager);
         myTabsAccessorAdapter = new TabsAccessorAdapter(getSupportFragmentManager());
@@ -69,41 +72,36 @@ public class MainActivity extends AppCompatActivity {
         myTabLayout.setupWithViewPager(myViewPager);
 
 
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
         if (currentUser == null) {
             SendUserToLoginActivity();
         }
-        else{
-
-        }
     }
-    public void VerifyUserExitsIntance(){
-        String currentUserID = mAuth.getCurrentUser().getUid();
-        rootReference.child(currentUserID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child("name").exists()){
-                    Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-                    startActivity(intent);
-                }
 
-            }
+//    public void VerifyUserExitsIntance() {
+//        String currentUserID = mAuth.getCurrentUser().getUid();
+//        rootReference.child(currentUserID).addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                if (dataSnapshot.child("name").exists()) {
+//                    Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Intent intent = new Intent(MainActivity.this, SettingActivity.class);
+//                    startActivity(intent);
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError databaseError) {
+//
+//            }
+//        });
+//    }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -116,70 +114,96 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
-        if(item.getItemId() == R.id.main_find_friends_option){
+        if (item.getItemId() == R.id.main_find_friends_option) {
 
 
         }
-        if(item.getItemId() == R.id.main_setting_option){
+        if (item.getItemId() == R.id.main_setting_option) {
             Intent intent = new Intent(MainActivity.this, SettingActivity.class);
             startActivity(intent);
-
-
         }
-        if(item.getItemId() == R.id.main_logout_option){
+        if (item.getItemId() == R.id.main_logout_option) {
             mAuth.signOut();
             SendUserToLoginActivity();
         }
 
-        if(item.getItemId() == R.id.main_create_group_option){
-
+        if (item.getItemId() == R.id.main_create_group_option) {
+            RequestNewGroup();
         }
 
         return true;
 
     }
 
-    private void RequestNewGroup(){
-        AlertDialog .Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.AlertDialog);
-        builder.setTitle("Enter group name: ");
+    private void RequestNewGroup() {
 
-        final EditText groupNameField = new EditText(MainActivity.this);
-        groupNameField.setHint("e.g NFC card reader");
-        builder.setView(groupNameField);
+        final AlertDialog dialogBuilder = new AlertDialog.Builder(this).create();
+        LayoutInflater inflater = this.getLayoutInflater();
+        View dialogView = inflater.inflate(R.layout.dialog_create_group, null);
 
-        builder.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+        final EditText groupNameField = dialogView.findViewById(R.id.etgroupName);
+        TextView txtError = dialogView.findViewById(R.id.tvErrorMessage);
+        Button button1 =  dialogView.findViewById(R.id.btnCancel);
+        Button button2 = dialogView.findViewById(R.id.btnOk);
+
+
+        button2.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                String groupName = groupNameField.getText().toString();
+            public void onClick(View v) {
+                String groupName = groupNameField.getText().toString().trim();
 
-                if(TextUtils.isEmpty(groupName)){
+                if (TextUtils.isEmpty(groupName)) {
                     Toast.makeText(MainActivity.this, "Please enter group name !!!", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    CreateNewGroup(groupName);
+                } else {
+                    VerifyUserExitsGroupName(groupName);
+
+                    dialogBuilder.dismiss();
                 }
             }
         });
 
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+        button1.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
+            public void onClick(View v) {
+                dialogBuilder.cancel();
+                dialogBuilder.dismiss();
             }
         });
 
-        builder.show();
+        dialogBuilder.setView(dialogView);
+        dialogBuilder.show();
     }
-    private void CreateNewGroup(String groupName){
+
+    public void VerifyUserExitsGroupName(final String txtName) {
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("Groups");
+        ref.orderByChild("Groups").equalTo(txtName).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.getValue() != null) {
+                    Toast.makeText(MainActivity.this, "Group already exsits", Toast.LENGTH_SHORT).show();
+                } else {
+                    CreateNewGroup(txtName);
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+
+    }
+
+
+    private void CreateNewGroup(String groupName) {
         rootReference.child("Groups").child(groupName).setValue("")
                 .addOnCompleteListener(new OnCompleteListener<Void>() {
                     @Override
                     public void onComplete(@NonNull Task<Void> task) {
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             Toast.makeText(MainActivity.this, "Group create successfully", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+
     }
 
     private void SendUserToLoginActivity() {

@@ -4,4 +4,80 @@
     <dimen name="spac_4_dp">4dp</dimen>
     <dimen name="space_20_dp">20dp</dimen>
 
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="space_10_dp">10dp</dimen>
+    <dimen name="text_padding">5dp</dimen>
+    <dimen name="rounded_corner_btn_radius">24dp</dimen>
+    <dimen name="rounded_corner_btn_radius_small">8dp</dimen>
+    <dimen name="btn_small_horizontal_padding">@dimen/dimen_medium</dimen>
+    <dimen name="rounded_dialog_radius">8dp</dimen>
+    <dimen name="card_rounded_radius">8dp</dimen>
+    <dimen name="dimen_minimum">0dp</dimen>
+    <dimen name="dimen_tiny">4dp</dimen>
+    <dimen name="dimen_small">8dp</dimen>
+    <dimen name="dimen_medium">16dp</dimen>
+    <dimen name="dimen_sub_medium">12dp</dimen>
+    <dimen name="dimen_sub_large">30dp</dimen>
+    <dimen name="dimen_large">32dp</dimen>
+    <dimen name="dimen_large_button_left_padding">30dp</dimen>
+    <dimen name="dimen_large_button_right_padding">32dp</dimen>
+    <dimen name="expense_title_width">64dp</dimen>
+    <dimen name="input_text_width">260dp</dimen>
+    <dimen name="logo_text_max_width">110dp</dimen>
+    <dimen name="dlg_text_size">18sp</dimen>
+    <dimen name="dlg_large_text_size">20sp</dimen>
+    <dimen name="button_typical_width">120dp</dimen>
+    <dimen name="button_confirm_typical_width">110dp</dimen>
+    <dimen name="history_empId_marginLeft">6dp</dimen>
+    <dimen name="history_buttonbar_paddingLeft">4dp</dimen>
+    <dimen name="export_empId_paddingLeft">@dimen/dimen_small</dimen>
+    <dimen name="export_buttonbar_marginLeft">@dimen/dimen_small</dimen>
+    <dimen name="icon_bus_width">32dp</dimen>
+    <dimen name="icon_train_width">32dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="text_size_16sp">16sp</dimen>
+    <dimen name="margin_14dp">14dp</dimen>
+    <dimen name="margin_28dp">28dp</dimen>
+    <dimen name="margin_20dp">20dp</dimen>
+    <dimen name="margin_40dp">40dp</dimen>
+    <dimen name="text_size_20sp">20sp</dimen>
+    <dimen name="space_6dp">6dp</dimen>
+    <dimen name="space_4dp">4dp</dimen>
+    <dimen name="space_2dp">2dp</dimen>
+    <dimen name="guidline_start">0.0189</dimen>
+    <dimen name="guidline_space">0.72</dimen>
+    <dimen name="guidline_end">0.98</dimen>
+
+    <!-- Dimensions for M003 -->
+    <dimen name="history_marginLeft">10dp</dimen>
+    <dimen name="history_marginRight">10dp</dimen>
+    <dimen name="history_buttonBar_marginRight">0.9</dimen>
+    <dimen name="history_buttonBar_spaceBetween">@dimen/dimen_small</dimen>
+    <dimen name="history_buttonBar_guideline_buttonIncluded">0.80</dimen>
+    <dimen name="history_row_guideline_checkboxIncluded">0.75</dimen>
+    <dimen name="history_row_guideline_base">0.2</dimen>
+
+    <!-- Dimensions for M004 -->
+    <dimen name="management_marginLeft">@dimen/dimen_sub_medium</dimen>
+    <dimen name="management_marginRight">@dimen/dimen_sub_medium</dimen>
+    <dimen name="management_button_bar_margin_right">0.95</dimen>
+    <dimen name="management_button_bar_space_between">8dp</dimen>
+    <dimen name="management_row_marginTop">@dimen/dimen_tiny</dimen>
+    <dimen name="management_row_marginBottom">@dimen/dimen_tiny</dimen>
+    <dimen name="management_row_marginLeft">@dimen/dimen_tiny</dimen>
+    <dimen name="management_row_marginRight">@dimen/dimen_tiny</dimen>
+    <dimen name="management_row_guideline_base">@dimen/history_row_guideline_base</dimen>
+
+    <dimen name="button_nav_paddingTop">@dimen/dimen_tiny</dimen>
+    <dimen name="button_nav_paddingBottom">@dimen/dimen_tiny</dimen>
+
+    <!-- Customize styles of MaterialDrawer -->
+    <!-- https://github.com/mikepenz/MaterialDrawer#style-the-drawer -->
+    <!--<dimen name="material_drawer_width">320dp</dimen>-->
+
+
 </resources>

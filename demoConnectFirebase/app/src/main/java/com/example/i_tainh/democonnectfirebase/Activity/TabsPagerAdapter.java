@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.example.i_tainh.democonnectfirebase.Fragment.ChatsFragment;
-import com.example.i_tainh.democonnectfirebase.Fragment.FriendsFragment;
+//import com.example.i_tainh.democonnectfirebase.Fragment.FriendsFragment;
 import com.example.i_tainh.democonnectfirebase.Fragment.RequestFragment;
 
 
@@ -25,8 +25,8 @@ class TabsPagerAdapter extends FragmentPagerAdapter {
                 ChatsFragment chatsFragment = new ChatsFragment();
                 return chatsFragment;
             case 2 :
-                FriendsFragment friendsFragment = new FriendsFragment();
-                return friendsFragment;
+//                FriendsFragment friendsFragment = new FriendsFragment();
+//                return friendsFragment;
             default:
                 return null;
         }

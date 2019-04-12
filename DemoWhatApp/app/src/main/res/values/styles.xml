@@ -10,4 +10,87 @@
     
     <style name="AlertDialog" parent="Animation.AppCompat.Dialog"/>
 
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+
+    <!-- Small white text on button -->
+    <style name="ButtonWithWhiteSmallText">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <!-- Medium white text on button -->
+    <style name="ButtonWithWhiteMediumText">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <!-- Large white text on button -->
+    <style name="ButtonWithWhiteLargeText">
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <!-- Button Yes -->
+    <style name="ButtonYes" parent="ButtonWithWhiteLargeText">
+        <item name="android:paddingLeft">@dimen/dimen_minimum</item>
+        <item name="android:paddingRight">@dimen/dimen_minimum</item>
+    </style>
+
+    <!-- Button No -->
+    <style name="ButtonNo">
+        <item name="android:textColor">@color/button_no_stroke</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingLeft">@dimen/dimen_minimum</item>
+        <item name="android:paddingRight">@dimen/dimen_minimum</item>
+    </style>
+
+
+
+    <!-- Style for title text in constraint layout -->
+    <style name="BoldTextHeader">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/dimen_sub_large</item>
+        <item name="android:paddingBottom">@dimen/dimen_medium</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintHorizontal_bias">0.5</item>
+        <item name="android:textSize">@dimen/dlg_large_text_size</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!--  Style for title in linear layout -->
+    <style name="SimpleBoldTextHeader">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">@dimen/dimen_small</item>
+        <item name="android:paddingBottom">@dimen/dimen_small</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <style name="SpinnerItemStyle">
+        <item name="android:textColor">#000</item>
+        <item name="android:background">@color/expense_header_bg_light</item>
+    </style>
+
+    <style name="ButtonNav">
+        <item name="android:paddingStart">@dimen/dimen_medium</item>
+        <item name="android:paddingEnd">@dimen/dimen_medium</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textSize">@dimen/text_size_16sp</item>
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>

@@ -73,7 +73,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (!password.equals(comfirmPasswork)) {
             Toast.makeText(this, "Confirm password is wrong ....", Toast.LENGTH_SHORT).show();
         } else {
-            loadingBar.setTitle("Create new account");
+             loadingBar.setTitle("Create new account");
             loadingBar.setMessage("Please wait, while we are creating account for you.");
             loadingBar.show();
             mAuth.createUserWithEmailAndPassword(email, password).
