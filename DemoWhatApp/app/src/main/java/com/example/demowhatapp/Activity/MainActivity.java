@@ -115,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         if (item.getItemId() == R.id.main_find_friends_option) {
-
-
+            Intent intent = new Intent(MainActivity.this, FindFriendsActivity.class);
+            startActivity(intent);
         }
         if (item.getItemId() == R.id.main_setting_option) {
             Intent intent = new Intent(MainActivity.this, SettingActivity.class);

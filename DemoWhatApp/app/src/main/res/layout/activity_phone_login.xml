@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".Activity.PhoneLoginActivity">
 
+    <include
+        android:id="@+id/main_app_bar"
+        layout="@layout/app_bar_layout" />
+
     <android.support.constraint.Guideline
         android:id="@+id/guideline_vertical_start"
         android:orientation="vertical"

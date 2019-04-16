@@ -3,6 +3,8 @@
     package="com.example.demowhatapp">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.PhoneLoginActivity"></activity>
+        <activity android:name=".Activity.FindFriendsActivity"
+            android:parentActivityName=".Activity.MainActivity"></activity>
+        <activity android:name=".Activity.PhoneLoginActivity" />
         <activity android:name=".Activity.GroupChatsActivity" />
         <activity android:name=".Activity.SettingActivity" />
         <activity android:name=".Activity.RegisterActivity" />
@@ -23,6 +27,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.MainActivity" />
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Base.Theme.AppCompat" />
     </application>
 
 </manifest>
