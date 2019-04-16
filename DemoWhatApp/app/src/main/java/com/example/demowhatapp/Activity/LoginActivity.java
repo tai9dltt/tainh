@@ -64,6 +64,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
 
     }
+    public void OnLoginWithPhoneNumber(View v){
+        Intent intent = new Intent(LoginActivity.this, PhoneLoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
 
 

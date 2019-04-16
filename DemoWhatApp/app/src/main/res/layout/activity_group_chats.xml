@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.GroupChatsActivity">
+    tools:context=".Activity.GroupChatsActivity"
+    >
 
 
     <include
@@ -16,11 +17,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/main_app_bar"
-        android:layout_above="@+id/my_linearlayout"
-        tools:ignore="NotSibling">
+        android:layout_above="@id/my_linearlayout"
+       >
 
         <LinearLayout
-            android:id="@+id/my_linearlayout"
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:layout_height="wrap_content">
@@ -28,10 +28,11 @@
             <TextView
                 android:id="@+id/group_chat_text_display"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/space_2dp"
                 android:layout_marginEnd="@dimen/space_2dp"
-                android:layout_marginBottom="60dp"
+                android:textColor="@android:color/black"
+                android:layout_marginBottom="50dp"
                 android:padding="@dimen/space_10_dp"
                 android:textSize="@dimen/text_size_20sp" />
 
@@ -40,6 +41,7 @@
     </ScrollView>
     
     <LinearLayout
+        android:id="@+id/my_linearlayout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,13 +50,13 @@
 
         <EditText
             android:id="@+id/input_group_message"
-            android:layout_weight="0.2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Write your messages..."
-            android:padding="@dimen/space_10_dp"
             android:layout_gravity="bottom"
-            android:gravity="bottom"/>
+            android:layout_weight="0.2"
+            android:gravity="bottom"
+            android:hint="Write your messages..."
+            android:padding="@dimen/space_10_dp" />
 
         <ImageButton
             android:id="@+id/send_message_button"

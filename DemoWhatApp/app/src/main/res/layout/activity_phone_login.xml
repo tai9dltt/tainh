@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.PhoneLoginActivity">
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_start"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintGuide_percent="0.1"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_end"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintGuide_percent="0.9"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_middle1"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintGuide_percent="0.2"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_vertical_middle2"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintGuide_percent="0.8"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline_horizontal"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintGuide_percent="0.3"/>
+
+    <EditText
+        android:id="@+id/verification_input_phone_number"
+        android:layout_width="0dp"
+        android:padding="@dimen/spac_8_dp"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+        android:hint="Input phone number"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
+        android:background="@drawable/inputs"
+        android:drawableStart="@drawable/ic_phone"
+        />
+
+    <EditText
+        android:id="@+id/verification_input_code_verification"
+        android:layout_width="0dp"
+        android:padding="@dimen/spac_8_dp"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+        android:hint="Input code verification number"
+        app:layout_constraintTop_toBottomOf="@id/verification_input_phone_number"
+        android:background="@drawable/inputs"
+        android:layout_marginTop="@dimen/margin_20dp"
+        android:drawableStart="@drawable/ic_password"
+        android:visibility="invisible"
+
+
+        />
+
+    <Button
+
+        android:id="@+id/tv_send_verification_code"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+        android:text="Send verification code"
+        android:gravity="center"
+        android:background="@drawable/buttons"
+        app:layout_constraintTop_toBottomOf="@id/verification_input_code_verification"
+        android:layout_marginTop="@dimen/margin_28dp"
+
+        />
+
+    <Button
+        android:id="@+id/btnVerify"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+        app:layout_constraintTop_toBottomOf="@id/tv_send_verification_code"
+        android:layout_marginTop="@dimen/margin_28dp"
+        android:background="@drawable/buttons"
+        android:text="Verify"
+        android:onClick="OnVerify"
+        android:visibility="invisible"
+
+        />
+
+</android.support.constraint.ConstraintLayout>
