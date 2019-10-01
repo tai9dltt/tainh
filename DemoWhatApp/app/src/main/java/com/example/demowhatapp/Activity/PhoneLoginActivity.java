@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 
@@ -47,7 +48,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
         Intilizefield();
 
         mAuth = FirebaseAuth.getInstance();
-        mAuth.setLanguageCode("fr");
+
 
 
         tv_sendVerificationCode.setOnClickListener(new View.OnClickListener() {
@@ -63,11 +64,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
                     loadingBar.show();
 
                     PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                            phoneNumber,        // Phone number to verify
-                            60,                 // Timeout duration
-                            TimeUnit.SECONDS,   // Unit of timeout
-                            PhoneLoginActivity.this,  // Activity (for callback binding)
-                            callbacks);        // OnVerificationStateChangedCallbacks
+                           phoneNumber,60, TimeUnit.SECONDS, PhoneLoginActivity.this, callbacks);
                 }
 
             }
@@ -82,22 +79,24 @@ public class PhoneLoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onVerificationFailed(FirebaseException e) {
-                        loadingBar.dismiss();
                         ed_inputPhoneNumber.setError("Invalid Phone number");
+                        Log.w("ONERROR", "onVerificationFailed", e);
+
+                        loadingBar.dismiss();
+                        ed_inputPhoneNumber.setVisibility(View.INVISIBLE);
+                        tv_sendVerificationCode.setVisibility(View.INVISIBLE);
+
+                        ed_input_code_verification.setVisibility(View.VISIBLE);
+                        verifyButton.setVisibility(View.VISIBLE);
                     }
 
                     @Override
-                    public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-                        super.onCodeSent(s, forceResendingToken);
-                        // The SMS verification code has been sent to the provided phone number, we
-                        // now need to ask the user to enter the code and then construct a credential
-                        // by combining the code with a verification ID.
-                        Log.d("CodeSent", "onCodeSent:" + mVerificationId);
+                    public void onCodeSent(String veryficationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
 
-                        // Save verification ID and resending token so we can use them later
-                        loadingBar.dismiss();
-                        mVerificationId = s;
+                        mVerificationId = veryficationId;
                         mResendToken = forceResendingToken;
+                        loadingBar.dismiss();
+
 
                         ed_inputPhoneNumber.setVisibility(View.INVISIBLE);
                         tv_sendVerificationCode.setVisibility(View.INVISIBLE);
@@ -113,10 +112,15 @@ public class PhoneLoginActivity extends AppCompatActivity {
 
 
     public void OnVerify(View v) {
+
         String verifyCode = ed_input_code_verification.getText().toString();
         if (TextUtils.isEmpty(verifyCode)) {
             ed_input_code_verification.setError("Phone Number is required");
         } else {
+            loadingBar.setTitle("Verification Code!");
+            loadingBar.setMessage("Please wai, while we are verifying Verification code ...");
+            loadingBar.setCancelable(false);
+            loadingBar.show();
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(mVerificationId, verifyCode);
             signInWithPhoneAuthCredential(credential);
         }
@@ -138,6 +142,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
                         } else {
                             String messageError = task.getException().toString();
                             Toast.makeText(PhoneLoginActivity.this, messageError, Toast.LENGTH_SHORT).show();
+                            loadingBar.dismiss();
                         }
                     }
                 });

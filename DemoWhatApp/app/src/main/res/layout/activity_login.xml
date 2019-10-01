@@ -24,10 +24,10 @@
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_vertical_middle1"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintGuide_percent="0.2"/>
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="81dp" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline_vertical_middle2"
@@ -83,6 +83,8 @@
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
         />
 
+
+
     <TextView
         android:id="@+id/login_forget_password"
         android:textStyle="bold"
@@ -93,6 +95,17 @@
         android:layout_height="wrap_content"
         android:text="Forget Password"
         app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"/>
+
+    <CheckBox
+        android:id="@+id/checkboxSavePassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/login_password"
+        app:layout_constraintStart_toStartOf="@+id/guideline_vertical_start"
+        android:text="Save Password"
+
+        />
+
 
     <Button
         android:id="@+id/btn_login"
