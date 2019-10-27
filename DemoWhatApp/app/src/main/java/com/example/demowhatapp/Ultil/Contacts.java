@@ -4,13 +4,15 @@ public class Contacts {
 
     public String name, status, image;
 
+    public Contacts()
+    {
+
+    }
+
     public Contacts(String name, String status, String image) {
         this.name = name;
         this.status = status;
         this.image = image;
-    }
-
-    public Contacts() {
     }
 
     public String getName() {
@@ -35,14 +37,5 @@ public class Contacts {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    @Override
-    public String toString() {
-        return "Contacts{" +
-                "name='" + name + '\'' +
-                ", status='" + status + '\'' +
-                ", image='" + image + '\'' +
-                '}';
     }
 }

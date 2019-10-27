@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -47,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private CheckBox checkBoxSavePassword;
 
-
+    private DatabaseReference UserRef;
 
 
     @Override
@@ -56,9 +57,13 @@ public class LoginActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(this);
         setContentView(R.layout.activity_login);
 
+
         mAuth = FirebaseAuth.getInstance();
+        UserRef = FirebaseDatabase.getInstance().getReference().child("Users");
         rootReference = FirebaseDatabase.getInstance().getReference();
         currentUser = mAuth.getCurrentUser();
+
+
 
         InitializeFields();
 
@@ -137,12 +142,26 @@ public class LoginActivity extends AppCompatActivity {
         }
         else{
             loadingBar.setTitle("Create new account");
-            loadingBar.setMessage("Please wait, while loging....");
+            loadingBar.setMessage("Please wait, while logging....");
             loadingBar.show();
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
+                        String currentUserId = mAuth.getCurrentUser().getUid();
+                        String deviceToken = FirebaseInstanceId.getInstance().getToken();
+                        UserRef.child(currentUserId).child("device_token").setValue(deviceToken)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            SendUserToMainActivity();
+                                            Toast.makeText(LoginActivity.this, "Logged", Toast.LENGTH_SHORT).show();
+                                            loadingBar.dismiss();
+                                        }
+                                    }
+                                });
+
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

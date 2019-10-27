@@ -50,7 +50,6 @@ public class PhoneLoginActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
 
-
         tv_sendVerificationCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,51 +63,48 @@ public class PhoneLoginActivity extends AppCompatActivity {
                     loadingBar.show();
 
                     PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                           phoneNumber,60, TimeUnit.SECONDS, PhoneLoginActivity.this, callbacks);
+                            phoneNumber, 60, TimeUnit.SECONDS, PhoneLoginActivity.this, callbacks);
                 }
 
             }
         });
 
 
-                callbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-                    @Override
-                    public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
-                        signInWithPhoneAuthCredential(phoneAuthCredential);
-                    }
+        callbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            @Override
+            public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+                signInWithPhoneAuthCredential(phoneAuthCredential);
+            }
 
-                    @Override
-                    public void onVerificationFailed(FirebaseException e) {
-                        ed_inputPhoneNumber.setError("Invalid Phone number");
-                        Log.w("ONERROR", "onVerificationFailed", e);
+            @Override
+            public void onVerificationFailed(FirebaseException e) {
+                ed_inputPhoneNumber.setError("Invalid Phone number");
+                Log.w("ONERROR", "onVerificationFailed", e);
 
-                        loadingBar.dismiss();
-                        ed_inputPhoneNumber.setVisibility(View.INVISIBLE);
-                        tv_sendVerificationCode.setVisibility(View.INVISIBLE);
+                loadingBar.dismiss();
+                ed_inputPhoneNumber.setVisibility(View.INVISIBLE);
+                tv_sendVerificationCode.setVisibility(View.INVISIBLE);
 
-                        ed_input_code_verification.setVisibility(View.VISIBLE);
-                        verifyButton.setVisibility(View.VISIBLE);
-                    }
+                ed_input_code_verification.setVisibility(View.VISIBLE);
+                verifyButton.setVisibility(View.VISIBLE);
+            }
 
-                    @Override
-                    public void onCodeSent(String veryficationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+            @Override
+            public void onCodeSent(String veryficationId, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                mVerificationId = veryficationId;
+                mResendToken = forceResendingToken;
+                loadingBar.dismiss();
 
-                        mVerificationId = veryficationId;
-                        mResendToken = forceResendingToken;
-                        loadingBar.dismiss();
 
+                ed_inputPhoneNumber.setVisibility(View.INVISIBLE);
+                tv_sendVerificationCode.setVisibility(View.INVISIBLE);
 
-                        ed_inputPhoneNumber.setVisibility(View.INVISIBLE);
-                        tv_sendVerificationCode.setVisibility(View.INVISIBLE);
-
-                        ed_input_code_verification.setVisibility(View.VISIBLE);
-                        verifyButton.setVisibility(View.VISIBLE);
-
-                    }
-                };
+                ed_input_code_verification.setVisibility(View.VISIBLE);
+                verifyButton.setVisibility(View.VISIBLE);
+            }
+        };
 
     }
-
 
 
     public void OnVerify(View v) {
@@ -125,7 +121,6 @@ public class PhoneLoginActivity extends AppCompatActivity {
             signInWithPhoneAuthCredential(credential);
         }
     }
-
 
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {

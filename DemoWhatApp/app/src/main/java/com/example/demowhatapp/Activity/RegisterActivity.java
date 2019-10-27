@@ -23,6 +23,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import io.reactivex.disposables.Disposable;
 
@@ -81,10 +82,10 @@ public class RegisterActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if (task.isSuccessful()) {
-
+                                String deviceToken = FirebaseInstanceId.getInstance().getToken();
                                 String currentUsetID = mAuth.getCurrentUser().getUid();
                                 rootReference.child("Users").child(currentUsetID).setValue("");
-
+                                rootReference.child("Users").child(currentUsetID).child("device_token").setValue(deviceToken);
                                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);

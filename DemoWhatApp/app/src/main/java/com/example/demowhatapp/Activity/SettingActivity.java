@@ -7,12 +7,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 
 import com.example.demowhatapp.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -57,6 +59,10 @@ public class SettingActivity extends AppCompatActivity {
 
     private ProgressDialog loadingBar;
 
+    private Toolbar settingToolBar;
+
+    Uri imageUri = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,13 +87,53 @@ public class SettingActivity extends AppCompatActivity {
             }
         });
 
+        updateAccountButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                UpdateSettings();
+            }
+        });
+
     }
+
+    private void UpdateSettings() {
+        String setUserName = userName.getText().toString().trim();
+        String setUserStatus = userStatus.getText().toString().trim();
+
+        if (TextUtils.isEmpty(setUserName)) {
+            Toast.makeText(this, "Please enter your name ....", Toast.LENGTH_SHORT).show();
+        }
+        if (TextUtils.isEmpty(setUserStatus)) {
+            Toast.makeText(this, "Please enter your status ....", Toast.LENGTH_SHORT).show();
+        } else {
+            Map<String, Object> profileMap = new HashMap<>();
+
+            profileMap.put("uid", currentUserID);
+            profileMap.put("name", setUserName);
+            profileMap.put("status", setUserStatus);
+
+            rootReference.child("Users").child(currentUserID).updateChildren(profileMap)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Toast.makeText(SettingActivity.this, "Profile update successfully ....", Toast.LENGTH_SHORT).show();
+                            } else {
+                                String message = task.getException().toString();
+                                Log.d(LOG_NAME, message);
+                            }
+                        }
+                    });
+        }
+    }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == GALLERY_PICK && resultCode == RESULT_OK && data != null) {
-            Uri imageUri = data.getData();
+          imageUri  = data.getData();
 
             CropImage.activity()
                     .setGuidelines(CropImageView.Guidelines.ON)
@@ -102,11 +148,11 @@ public class SettingActivity extends AppCompatActivity {
                 loadingBar.setMessage("Please wait while uploading image...");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
-                Uri resultUri = result.getUri();
+                 imageUri = result.getUri();
 
                 final StorageReference filePath = UserProfileRef.child(currentUserID + ".jpg");
 
-                filePath.putFile(resultUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                filePath.putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         filePath.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -139,36 +185,7 @@ public class SettingActivity extends AppCompatActivity {
     }
 
 
-    public void OnUpdateProfile(View view) {
-        String setUserName = userName.getText().toString().trim();
-        String setUserStatus = userStatus.getText().toString().trim();
 
-        if (TextUtils.isEmpty(setUserName)) {
-            Toast.makeText(this, "Please enter your name ....", Toast.LENGTH_SHORT).show();
-        }
-        if (TextUtils.isEmpty(setUserStatus)) {
-            Toast.makeText(this, "Please enter your status ....", Toast.LENGTH_SHORT).show();
-        } else {
-            Map<String, String> profileMap = new HashMap<>();
-
-            profileMap.put("uid", currentUserID);
-            profileMap.put("name", setUserName);
-            profileMap.put("status", setUserStatus);
-
-            rootReference.child("Users").child(currentUserID).setValue(profileMap)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(SettingActivity.this, "Profile update successfully ....", Toast.LENGTH_SHORT).show();
-                            } else {
-                                String message = task.getException().toString();
-                                Log.d(LOG_NAME, message);
-                            }
-                        }
-                    });
-        }
-    }
 
     private void RetriveUserInfo() {
         rootReference.child("Users").child(currentUserID).addValueEventListener(new ValueEventListener() {
@@ -211,5 +228,10 @@ public class SettingActivity extends AppCompatActivity {
         userStatus = findViewById(R.id.set_profile_status);
         userProfileImage = (CircleImageView) findViewById(R.id.profile_image);
         loadingBar = new ProgressDialog(this);
+        settingToolBar = findViewById(R.id.setting_tool);
+        setSupportActionBar(settingToolBar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowCustomEnabled(true);
+        getSupportActionBar().setTitle("Account Setting");
     }
 }

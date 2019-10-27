@@ -7,6 +7,13 @@
     tools:context=".Activity.SettingActivity"
     android:layout_margin="@dimen/spac_4_dp">
 
+    <include
+        layout="@layout/app_bar_layout"
+        android:id="@+id/setting_tool"
+        >
+
+    </include>
+
     <android.support.constraint.Guideline
         android:id="@+id/guideline_vertical_start"
         android:orientation="vertical"
@@ -45,7 +52,7 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/profile_image"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:src="@drawable/profile_image"
@@ -53,7 +60,7 @@
         app:civ_border_color="@color/colorPrimary"
         app:layout_constraintStart_toEndOf="@id/guideline_vertical_middle1"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_middle2"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/setting_tool"
         tools:ignore="MissingConstraints" />
     <EditText
         android:id="@+id/set_username"
@@ -99,7 +106,7 @@
         app:layout_constraintTop_toBottomOf="@id/set_profile_status"
         app:layout_constraintStart_toEndOf="@id/guideline_vertical_middle1"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_middle2"
-        android:onClick="OnUpdateProfile"
+
         />
 
 
