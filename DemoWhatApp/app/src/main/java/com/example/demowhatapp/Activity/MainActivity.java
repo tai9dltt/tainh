@@ -62,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
 
         mToolbar = findViewById(R.id.main_app_bar);
         setSupportActionBar(mToolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle("WhatApps");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("ChillApps");
+
 
         myViewPager = findViewById(R.id.main_tabs_pager);
         myTabsAccessorAdapter = new TabsAccessorAdapter(getSupportFragmentManager());
@@ -81,27 +82,6 @@ public class MainActivity extends AppCompatActivity {
             SendUserToLoginActivity();
         }
     }
-
-//    public void VerifyUserExitsIntance() {
-//        String currentUserID = mAuth.getCurrentUser().getUid();
-//        rootReference.child(currentUserID).addValueEventListener(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                if (dataSnapshot.child("name").exists()) {
-//                    Toast.makeText(MainActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Intent intent = new Intent(MainActivity.this, SettingActivity.class);
-//                    startActivity(intent);
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError databaseError) {
-//
-//            }
-//        });
-//    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

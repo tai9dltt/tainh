@@ -61,7 +61,9 @@ public class SettingActivity extends AppCompatActivity {
 
     private Toolbar settingToolBar;
 
-    Uri imageUri = null;
+    private  Uri  imageUri =null;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +95,8 @@ public class SettingActivity extends AppCompatActivity {
                 UpdateSettings();
             }
         });
+
+        RetriveUserInfo();
 
     }
 
@@ -148,7 +152,7 @@ public class SettingActivity extends AppCompatActivity {
                 loadingBar.setMessage("Please wait while uploading image...");
                 loadingBar.setCanceledOnTouchOutside(false);
                 loadingBar.show();
-                 imageUri = result.getUri();
+                imageUri = result.getUri();
 
                 final StorageReference filePath = UserProfileRef.child(currentUserID + ".jpg");
 
@@ -179,6 +183,7 @@ public class SettingActivity extends AppCompatActivity {
                 });
             } else {
                 Toast.makeText(SettingActivity.this, "Something wrong, try again", Toast.LENGTH_SHORT).show();
+                loadingBar.dismiss();
             }
         }
 

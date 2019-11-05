@@ -5,8 +5,8 @@
     <color name="colorAccent">#E6E6E6</color>
     <color name="button_scan_border">#009EE7</color>
     <color name="button_scan_disabled_bg">#88CFCFCF</color>
-    <color name="button_export_bg">#009EE7</color>
-    <color name="button_yes_bg">#009EE7</color>
+    <color name="button_export_bg">#DC13CE2A</color>
+    <color name="button_yes_bg">#DC13CE2A</color>
     <color name="button_yes_bg_disabled">#45009EE7</color>
     <color name="button_no_stroke">#009EE7</color>
     <color name="table_header_bg">#029DE6</color>

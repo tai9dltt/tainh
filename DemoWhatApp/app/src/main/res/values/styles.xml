@@ -7,8 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    
-    <style name="AlertDialog" parent="Animation.AppCompat.Dialog"/>
+
+    <style name="AlertDialog" parent="Animation.AppCompat.Dialog" />
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
@@ -18,7 +18,6 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
 
 
     <!-- Small white text on button -->
@@ -52,7 +51,6 @@
         <item name="android:paddingLeft">@dimen/dimen_minimum</item>
         <item name="android:paddingRight">@dimen/dimen_minimum</item>
     </style>
-
 
 
     <!-- Style for title text in constraint layout -->
