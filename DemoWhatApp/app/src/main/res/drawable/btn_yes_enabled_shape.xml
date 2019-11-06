@@ -9,7 +9,7 @@
                 android:radius="60dp"
                 android:topLeftRadius="@dimen/rounded_corner_btn_radius"
                 android:topRightRadius="@dimen/rounded_corner_btn_radius" />
-            <solid android:color="@android:color/darker_gray" />
+            <solid android:color="@android:color/background_light" />
             <padding
                 android:bottom="0dp"
                 android:left="0dp"
@@ -27,7 +27,7 @@
                 android:radius="60dp"
                 android:topLeftRadius="@dimen/rounded_corner_btn_radius"
                 android:topRightRadius="@dimen/rounded_corner_btn_radius" />
-            <solid android:color="@color/button_export_bg" />
+            <solid android:color="@color/colorPrimary" />
             <padding
                 android:bottom="0dp"
                 android:left="0dp"
