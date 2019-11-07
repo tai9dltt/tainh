@@ -169,7 +169,7 @@
         android:onClick="OnLoginWithPhoneNumber"
         />
 
-    <ImageButton
+    <ImageView
         android:id="@+id/btnLoginWithFinger"
         android:src="@drawable/ic_fingerprint_black_24dp"
         android:layout_width="60dp"
