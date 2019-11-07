@@ -2,16 +2,14 @@ package com.example.demowhatapp.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,8 +22,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
-
-import io.reactivex.disposables.Disposable;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -74,7 +70,8 @@ public class RegisterActivity extends AppCompatActivity {
         if (!password.equals(comfirmPasswork)) {
             Toast.makeText(this, "Confirm password is wrong ....", Toast.LENGTH_SHORT).show();
         } else {
-             loadingBar.setTitle("Create new account");
+
+            loadingBar.setTitle("Create new account");
             loadingBar.setMessage("Please wait, while we are creating account for you.");
             loadingBar.show();
             mAuth.createUserWithEmailAndPassword(email, password).
@@ -114,7 +111,6 @@ public class RegisterActivity extends AppCompatActivity {
         AlreadyHaveAccountLink = findViewById(R.id.already_have_a_account);
         loadingBar = new ProgressDialog(this);
     }
-
 
 
 
