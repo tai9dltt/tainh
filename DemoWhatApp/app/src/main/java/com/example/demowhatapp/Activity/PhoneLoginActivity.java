@@ -131,7 +131,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
                             Toast.makeText(PhoneLoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(PhoneLoginActivity.this, MainActivity.class);
                             startActivity(intent);
-                            finish();
+
                         } else {
                             String messageError = task.getException().toString();
                             Toast.makeText(PhoneLoginActivity.this, messageError, Toast.LENGTH_SHORT).show();

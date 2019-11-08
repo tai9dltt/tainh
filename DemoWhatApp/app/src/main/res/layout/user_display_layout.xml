@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:text="user name"
                     android:textAlignment="textStart"
-                    android:textSize="18sp"
+                    android:textSize="20sp"
                     android:textStyle="bold"
                     />
 
@@ -79,6 +79,7 @@
                     android:background="@android:color/holo_green_light"
                     android:visibility="invisible"
                     />
+
 
                 <Button
                     android:id="@+id/request_cancel_btn"

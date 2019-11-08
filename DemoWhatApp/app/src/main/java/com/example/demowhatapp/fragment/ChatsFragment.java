@@ -27,9 +27,6 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class ChatsFragment extends Fragment {
 
     private View PrivateChatsView;

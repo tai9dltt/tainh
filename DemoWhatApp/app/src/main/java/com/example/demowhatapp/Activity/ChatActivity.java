@@ -186,7 +186,6 @@ public class ChatActivity extends AppCompatActivity {
         loadingBar = new ProgressDialog(this);
 
 
-
         Calendar calendar = Calendar.getInstance();
 
         SimpleDateFormat currentDate = new SimpleDateFormat("MMM dd, yyyy");
@@ -220,25 +219,25 @@ public class ChatActivity extends AppCompatActivity {
                 filePath.putFile(fileUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                       if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
 
-                           Map messageTextBody = new HashMap();
-                           messageTextBody.put("message", task.getResult().getMetadata().getReference().getDownloadUrl().toString());
-                           messageTextBody.put("name", fileUri.getLastPathSegment());
-                           messageTextBody.put("type", checker);
-                           messageTextBody.put("from", messageSenderID);
-                           messageTextBody.put("to", messageReceiverID);
-                           messageTextBody.put("messageID", messagePushID);
-                           messageTextBody.put("time", saveCurrentTime);
-                           messageTextBody.put("date", saveCurrentDate);
+                            Map messageTextBody = new HashMap();
+                            messageTextBody.put("message", task.getResult().getMetadata().getReference().getDownloadUrl().toString());
+                            messageTextBody.put("name", fileUri.getLastPathSegment());
+                            messageTextBody.put("type", checker);
+                            messageTextBody.put("from", messageSenderID);
+                            messageTextBody.put("to", messageReceiverID);
+                            messageTextBody.put("messageID", messagePushID);
+                            messageTextBody.put("time", saveCurrentTime);
+                            messageTextBody.put("date", saveCurrentDate);
 
-                           Map messageBodyDetails = new HashMap();
-                           messageBodyDetails.put(messageSenderRef + "/" + messagePushID, messageTextBody);
-                           messageBodyDetails.put(messageReceiverRef + "/" + messagePushID, messageTextBody);
+                            Map messageBodyDetails = new HashMap();
+                            messageBodyDetails.put(messageSenderRef + "/" + messagePushID, messageTextBody);
+                            messageBodyDetails.put(messageReceiverRef + "/" + messagePushID, messageTextBody);
 
-                           RootRef.updateChildren(messageBodyDetails);
-                           loadingBar.dismiss();
-                       }
+                            RootRef.updateChildren(messageBodyDetails);
+                            loadingBar.dismiss();
+                        }
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -250,7 +249,7 @@ public class ChatActivity extends AppCompatActivity {
                     @Override
                     public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
                         double p = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                        loadingBar.setMessage((int) p +"% Uploading ....");
+                        loadingBar.setMessage((int) p + "% Uploading ....");
 
                     }
                 });
@@ -314,7 +313,7 @@ public class ChatActivity extends AppCompatActivity {
                 });
                 loadingBar.dismiss();
             } else {
-                Toast.makeText(this, "notthing selected - Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Nothing selected - Error", Toast.LENGTH_SHORT).show();
             }
         }
     }

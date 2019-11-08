@@ -79,8 +79,8 @@ public class RequestsFragment extends Fragment {
                 new FirebaseRecyclerAdapter<Contacts, RequestsViewHolder>(options) {
                     @Override
                     protected void onBindViewHolder(@NonNull final RequestsViewHolder holder, int position, @NonNull Contacts model) {
-                        holder.itemView.findViewById(R.id.request_accept_btn).setVisibility(View.VISIBLE);
-                        holder.itemView.findViewById(R.id.request_cancel_btn).setVisibility(View.VISIBLE);
+                        holder.itemView.findViewById(R.id.request_accept_btn).setVisibility(View.INVISIBLE);
+                        holder.itemView.findViewById(R.id.request_cancel_btn).setVisibility(View.INVISIBLE);
 
 
                         final String list_user_id = getRef(position).getKey();
@@ -107,7 +107,7 @@ public class RequestsFragment extends Fragment {
                                                 final String requestUserStatus = dataSnapshot.child("status").getValue().toString();
 
                                                 holder.userName.setText(requestUserName);
-                                                holder.userStatus.setText("wants to connect with you.");
+                                                holder.userStatus.setText(" wants to connect with you.");
 
 
                                                 holder.itemView.setOnClickListener(new View.OnClickListener() {
