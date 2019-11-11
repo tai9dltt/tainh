@@ -200,13 +200,12 @@ public class ChatActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 438 && resultCode == RESULT_OK && data.getData() != null) {
-            loadingBar.setTitle("Sending Image");
+            loadingBar.setTitle("Sending ");
             loadingBar.setMessage("Please wait while Sending image...");
             loadingBar.setCanceledOnTouchOutside(false);
             loadingBar.show();
             fileUri = data.getData();
             if (!checker.equals("image")) {
-
                 StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Document Files");
                 final String messageSenderRef = "Messages/" + messageSenderID + "/" + messageReceiverID;
                 final String messageReceiverRef = "Messages/" + messageReceiverID + "/" + messageSenderID;
@@ -256,7 +255,6 @@ public class ChatActivity extends AppCompatActivity {
 
 
             } else if (checker.equals("image")) {
-
                 StorageReference storageReference = FirebaseStorage.getInstance().getReference().child("Image Files");
                 final String messageSenderRef = "Messages/" + messageSenderID + "/" + messageReceiverID;
                 final String messageReceiverRef = "Messages/" + messageReceiverID + "/" + messageSenderID;
@@ -302,6 +300,7 @@ public class ChatActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task task) {
                                     if (task.isSuccessful()) {
                                     } else {
+                                        loadingBar.dismiss();
                                         Toast.makeText(ChatActivity.this, "Error", Toast.LENGTH_SHORT).show();
                                     }
                                     MessageInputText.setText("");

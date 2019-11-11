@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.demowhatapp.R;
 import com.example.demowhatapp.Ultil.Contacts;
@@ -18,6 +19,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.protobuf.Empty;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -47,8 +49,7 @@ public class FindFriendsActivity extends AppCompatActivity {
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setTitle("Find Friends");
-
+        getSupportActionBar().setTitle("Add contact");
 
     }
 
@@ -71,16 +72,25 @@ public class FindFriendsActivity extends AppCompatActivity {
                         holder.userStatus.setText(model.getStatus());
                         Picasso.get().load(model.getImage()).placeholder(R.drawable.profile_image).into(holder.profileImage);
 
+                        String userName = holder.userName.getText().toString();
+                        String userStatus = holder.userStatus.getText().toString();
+
 
                         holder.itemView.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view)
                             {
-                                String visit_user_id = getRef(position).getKey();
+                                if(userName.isEmpty() | userStatus.isEmpty() | userName.isEmpty() && userStatus.isEmpty()){
+                                    Toast.makeText(FindFriendsActivity.this, "User is not variable Now !!! ", Toast.LENGTH_SHORT ).show();
+                                }
+                                else{
+                                    String visit_user_id = getRef(position).getKey();
 
-                                Intent profileIntent = new Intent(FindFriendsActivity.this, ProfileActivity.class);
-                                profileIntent.putExtra("visit_user_id", visit_user_id);
-                                startActivity(profileIntent);
+                                    Intent profileIntent = new Intent(FindFriendsActivity.this, ProfileActivity.class);
+                                    profileIntent.putExtra("visit_user_id", visit_user_id);
+                                    startActivity(profileIntent);
+                                }
+
                             }
                         });
                     }

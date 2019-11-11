@@ -140,6 +140,8 @@
         android:text="Chill Apps"
         android:textColor="#FDFCFC"
         android:textSize="45sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="50dp"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
         app:layout_constraintStart_toEndOf="@id/guideline_vertical_start" />
 
