@@ -7,9 +7,7 @@
     android:background="@drawable/bg_imglogin"
     tools:context=".Activity.PhoneLoginActivity">
 
-    <include
-        android:id="@+id/main_app_bar"
-        layout="@layout/app_bar_layout" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_vertical_start"
@@ -60,7 +58,7 @@
     <EditText
         android:id="@+id/verification_input_phone_number"
         android:layout_width="0dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="10dp"
         android:padding="@dimen/spac_8_dp"
         android:layout_height="wrap_content"
         android:inputType="phone"
@@ -68,13 +66,8 @@
         android:maxLength="13"
         app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
-<<<<<<< HEAD
         app:layout_constraintTop_toBottomOf="@id/txtTv"
         android:background="@drawable/inputs"
-=======
-        android:hint="  Input phone number"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
->>>>>>> 87acd76fd8b9953a611206a9ba905b200ad5555e
         android:drawableStart="@drawable/ic_phone"
         />
 

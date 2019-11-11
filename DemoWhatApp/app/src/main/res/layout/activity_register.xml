@@ -110,11 +110,12 @@
         android:id="@+id/already_have_a_account"
         app:layout_constraintTop_toBottomOf="@+id/btn_Register"
         android:layout_width="0dp"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:text="Already have an Account ?"
         android:textStyle="bold"
         android:gravity="center"
-        android:textColor="@color/colorPrimaryDark"
+        android:textColor="@color/text_highlight_black"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
         app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
         android:onClick="onMoveLoginActivity"/>
