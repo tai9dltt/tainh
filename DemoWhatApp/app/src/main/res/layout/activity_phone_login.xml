@@ -116,7 +116,18 @@
         android:text="Verify"
         android:onClick="OnVerify"
         android:visibility="invisible"
-
         />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/pacifico_regular"
+        android:text="Chill Apps"
+        android:textColor="#E91E63"
+        android:textSize="45sp"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_start" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
