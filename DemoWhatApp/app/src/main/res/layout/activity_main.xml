@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".Activity.MainActivity"
 
-    android:background="@drawable/bg_fragment">
+    android:background="@drawable/bg_thangfragment">
 
 
     <com.google.android.material.appbar.AppBarLayout
