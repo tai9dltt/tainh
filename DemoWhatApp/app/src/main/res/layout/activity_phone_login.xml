@@ -45,16 +45,29 @@
         android:layout_height="match_parent"
         app:layout_constraintGuide_percent="0.3"/>
 
+    <TextView
+        android:id="@+id/txtTv"
+        android:text="Input your phone number"
+        android:layout_width="wrap_content"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
+        app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
+        />
     <EditText
         android:id="@+id/verification_input_phone_number"
         android:layout_width="0dp"
+        android:layout_marginTop="5dp"
         android:padding="@dimen/spac_8_dp"
         android:layout_height="wrap_content"
         android:inputType="phone"
+        android:text="+84"
+        android:maxLength="13"
         app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
         app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
-        android:hint="Input phone number"
-        app:layout_constraintBottom_toTopOf="@id/guideline_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/txtTv"
         android:background="@drawable/inputs"
         android:drawableStart="@drawable/ic_phone"
         />
