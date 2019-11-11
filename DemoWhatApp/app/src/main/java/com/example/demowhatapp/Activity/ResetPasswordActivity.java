@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ResetPasswordActivity extends AppCompatActivity {
 
-    private TextView txtBack;
+
     private EditText txtEmailReset;
     private Button btnReset;
     private FirebaseAuth mAuth;
@@ -78,13 +78,6 @@ public class ResetPasswordActivity extends AppCompatActivity {
         });
 
 
-
-        txtBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
 
     }
 }

@@ -116,8 +116,9 @@ public class LoginActivity extends AppCompatActivity {
 
         // On Forgot password handel
         ForgetPasswordLink.setOnClickListener(view -> {
-            Intent intent = new Intent(getApplicationContext(), ResetPasswordActivity.class);
+            Intent intent = new Intent(LoginActivity.this, ResetPasswordActivity.class);
             startActivity(intent);
+            finish();
         });
 
     }
