@@ -1,6 +1,7 @@
 package com.example.demowhatapp.Activity;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import androidx.annotation.NonNull;
@@ -76,8 +77,13 @@ public class ResetPasswordActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(ResetPasswordActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
 }
