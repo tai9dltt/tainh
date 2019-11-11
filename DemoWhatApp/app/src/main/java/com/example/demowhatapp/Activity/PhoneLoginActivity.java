@@ -131,6 +131,7 @@ public class PhoneLoginActivity extends AppCompatActivity {
                             Toast.makeText(PhoneLoginActivity.this, "Login successfully", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(PhoneLoginActivity.this, MainActivity.class);
                             startActivity(intent);
+                            finish();
 
                         } else {
                             String messageError = task.getException().toString();
@@ -141,6 +142,13 @@ public class PhoneLoginActivity extends AppCompatActivity {
                 });
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent = new Intent(PhoneLoginActivity.this, LoginActivity.class);
+        startActivity(intent);
+        finish();
+    }
 
     private void Intilizefield() {
         verifyButton = findViewById(R.id.btnVerify);
