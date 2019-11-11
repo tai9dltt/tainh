@@ -42,6 +42,19 @@
             app:layout_constraintGuide_percent="0.8" />
 
         <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical_middle11"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="79dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertical_middle22"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.81" />
+        <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -54,11 +67,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="220dp"
             android:drawableStart="@drawable/ic_emai"
-            android:hint="    Email"
+            android:hint="    input your email"
             android:inputType="textEmailAddress"
             android:maxLines="1"
             android:padding="@dimen/spac_8_dp"
+            android:textAlignment="center"
+            android:textColorHint="#969595"
             app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -68,10 +84,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/space_20_dp"
             android:drawableStart="@drawable/ic_password"
-            android:hint="    Password"
+            android:hint="    input your password"
             android:inputType="textPassword"
             android:maxLines="1"
             android:padding="@dimen/spac_8_dp"
+            android:textAlignment="center"
+            android:textColorHint="#969595"
             app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
             app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
             app:layout_constraintTop_toBottomOf="@+id/login_email" />
@@ -82,8 +100,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
-            android:text="@string/forgot_pass"
-            android:textColor="@color/text_highlight_black"
+            android:text="Forget Password?"
+            android:textColor="#0A91EB"
             android:textSize="14dp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@id/guideline_vertical_end"
@@ -107,10 +125,25 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/button_signin"
             android:onClick="OnLogin"
-            android:text="Login"
+            android:text="Sign in"
+            android:visibility="visible"
             app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
             app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
             app:layout_constraintTop_toBottomOf="@+id/login_forget_password" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="13dp"
+            android:text="Don't have an account?"
+            android:textColor="#C9C3C3"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/guideline_vertical_middle11"
+            app:layout_constraintTop_toBottomOf="@+id/btn_login_by_phone"
+
+            />
 
         <TextView
             android:id="@+id/login_need_new_account"
@@ -118,12 +151,11 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:onClick="OnMoveRegisterActivity"
-            android:text="Create new Account"
-            android:textColor="@color/text_highlight_black"
+            android:text="Sign up"
+            android:textColor="#FDFCFC"
             android:textSize="16sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toStartOf="@id/guideline_vertical_middle2"
-            app:layout_constraintStart_toEndOf="@id/guideline_vertical_middle1"
+            app:layout_constraintEnd_toStartOf="@id/guideline_vertical_middle22"
             app:layout_constraintTop_toBottomOf="@+id/btn_login_by_phone"
 
             />
@@ -134,10 +166,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/buttons"
-            android:drawableStart="@drawable/ic_phone"
+            android:drawableLeft="@drawable/ic_phone"
             android:gravity="center"
             android:onClick="OnLoginWithPhoneNumber"
-            android:text="Login with your Phone"
+            android:text="Sign in with Phone"
             app:layout_constraintEnd_toStartOf="@id/guideline_vertical_end"
             app:layout_constraintStart_toEndOf="@id/guideline_vertical_start"
             app:layout_constraintTop_toBottomOf="@+id/btn_login" />
