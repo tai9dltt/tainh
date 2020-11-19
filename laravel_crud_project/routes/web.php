@@ -27,9 +27,13 @@ Route::group(['middleware' => ['auth', 'isAdmin']], function () {
     Route::get('admin-view', 'HomeController@adminView')->name('admin.view');
 });
 
-// Route::get('admin', ['admin'=>'HomeController@adminViews', 'as'=>'admin.admin-view']);
+Route::get('admin/getUsers/', 'HomeController@getUser')->name('admin.getUsers');
+
+Route::get('admin', 'HomeController@adminIndex');
 
 
-// Route::get('/admin', 'HomeController@adminIndex');
 
-Route::get('/admin/getUsers/', 'HomeController@adminView')->name('admin.admin-view');
+// Route::controller('admin', 'HomeController', [
+//     'getUser'  => 'admin.data',
+//     'adminIndex' => 'admin',
+// ]);
