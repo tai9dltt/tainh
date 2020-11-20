@@ -25,7 +25,7 @@
         <div class="card-body register-card-body">
             <p class="login-box-msg">Register a new membership</p>
 
-            <form method="post" action="{{ route('register') }}">
+            <form method="post" action="{{ route('register') }}" enctype="multipart/form-data">
                 @csrf
 
                 <div class="input-group mb-3">
@@ -82,6 +82,14 @@
                            placeholder="Retype password">
                     <div class="input-group-append">
                         <div class="input-group-text"><span class="fas fa-lock"></span></div>
+                    </div>
+                </div>
+                
+                <div class="input-group  mb-3">
+                    <label for="avatar" class="col-md-3 col-form-label text-md-right">{{ __('Avatar') }}</label>
+
+                    <div class="col-md">
+                         <input type="file" class="form-control" name="avatar" id="avatar">
                     </div>
                 </div>
 

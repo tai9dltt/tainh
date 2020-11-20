@@ -21,7 +21,10 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/users', 'UsersController@index');
+Route::resource('users','UsersController');
 
-Route::get('/users/getUsers/', 'UsersController@getUser')->name('users.getUsers');
+Route::get('users/{id}/edit/','UsersController@edit');
 
+Route::post('users/change/{id}', 'UsersController@changeStatus');
+
+Route::get('/users', 'UsersController@index')->middleware('auth','isAdmin');

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>{{ config('app.name') }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
         integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog=="
         crossorigin="anonymous" />
@@ -13,8 +13,15 @@
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     {{-- data table Lib --}}
-    <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css" />
-   
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+    {{--
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    --}}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
 
     @yield('third_party_stylesheets')
 
@@ -35,14 +42,14 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img src="https://infyom.com/images/logo/blue_logo_150x150.jpg"
+                        <img src="{{ Auth::user()->getFirstMediaUrl('avatars', 'thumb') }}"
                             class="user-image img-circle elevation-2" alt="User Image">
                         <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
                         <li class="user-header bg-primary">
-                            <img src="https://infyom.com/images/logo/blue_logo_150x150.jpg"
+                            <img src="{{ Auth::user()->getFirstMediaUrl('avatars', 'thumb') }}"
                                 class="img-circle elevation-2" alt="User Image">
                             <p>
                                 {{ Auth::user()->name }}
@@ -87,16 +94,14 @@
 
 
     <script src="{{ mix('js/app.js') }}" defer></script>
-  
-   
+
+
 
 
     @yield('third_party_scripts')
 
     @stack('page_scripts')
 
-<script type="text/javascript" src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 </body>
 
 

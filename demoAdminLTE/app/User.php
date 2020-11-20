@@ -5,10 +5,17 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class User extends Authenticatable
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
+class User extends Authenticatable implements HasMedia
 {
     use Notifiable;
+    use InteractsWithMedia;
+
+
 
     /**
      * The attributes that are mass assignable.
@@ -16,7 +23,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'role_id','password','status',
     ];
 
     /**
@@ -36,4 +43,19 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+
+    public function registerMediaConversions(Media $media = null) : void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(60)
+            ->height(60)
+            ->sharpen(10);
+         
+            // ->nonOptimized();
+    }
+
+    public function role(){
+        return $this->belongsTo('App\Role');
+    }
 }
