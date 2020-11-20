@@ -3,7 +3,7 @@
 @section('content')
 
     <div class="container">
-       <br>
+        <br>
         <div class="container-fluid">
             <div class="row">
                 <h4 class="one"> List User</h4>
@@ -11,6 +11,30 @@
             </div>
         </div>
         <br>
+
+        <div class="form-group col-md-3">
+            <h5>From Date <span class="text-danger"></span></h5>
+            <div class="controls">
+                <input type="date" name="from_date" id="from_date" class="form-control datepicker-autoclose"
+                    placeholder="Please from date">
+            </div>
+        </div>
+
+        <div class="form-group col-md-3">
+            <h5>To Date <span class="text-danger"></span></h5>
+            <div class="controls">
+                <input type="date" name="to_date" id="to_date" class="form-control datepicker-autoclose"
+                    placeholder="Please to date">
+            </div>
+        </div>
+
+
+        <div class="form-group col-md-2" style="margin-top: 32px;">
+            <div class="controls">
+                <button type="text" id="btn-search" class="btn btn-info form-control">Submit</button>
+            </div>
+        </div>
+
         <table id="dataTable" class="table table-bordered">
             <thead>
                 <tr>
@@ -47,8 +71,8 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">Email</label>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control" id="email" name="email"
-                                    placeholder="Enter email" value="" maxlength="50" required="" autocomplete="off">
+                                <input type="text" class="form-control" id="email" name="email" placeholder="Enter email"
+                                    value="" maxlength="50" required="" autocomplete="off">
                             </div>
                         </div>
                         <div class="form-group">
@@ -58,13 +82,25 @@
                                     placeholder="Enter password" value="" maxlength="50" required="" autocomplete="off">
                             </div>
                         </div>
-                        <div class="form-group">
+
+
+                        {{-- <div class="form-group">
                             <label class="col-sm-2 control-label">Role</label>
                             <div class="col-sm-12">
-                                <input type="text" class="form-control" id="role" name="role"
-                                    placeholder="Enter Role" value="" maxlength="50" required="" autocomplete="off">
+                                <input type="text" class="form-control" id="role" name="role" placeholder="Enter Role"
+                                    value="" maxlength="50" required="" autocomplete="off">
                             </div>
-                        </div>
+                        </div> --}}
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label" for="exampleFormControlSelect1">Role</label>
+                            <select class="form-control" id="role" name="role">
+                              <option value="1">Admin</option>
+                              <option value="2">User</option>
+                            </select>
+                          </div>
+
+
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary" id="saveBtn">Save</button>
                         </div>
@@ -89,10 +125,16 @@
             var table = $('#dataTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ url('users') }}",
+                ajax: {
+                    url: "{{ url('users') }}",
+                    data: function(d) {
+                        d.from_date = $('#from_date').val();
+                        d.to_date = $('#to_date').val();
+                    }
+                },
                 columns: [{
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex'
+                        data: 'id',
+                        name: 'id'
                     },
                     {
                         data: 'name',
@@ -104,7 +146,12 @@
                     },
                     {
                         data: 'role_id',
-                        name: 'role_id'
+                        name: 'role_id',
+                        render: function(data, type, full, meta) {
+                            if(data == 1)
+                            return "Admin";
+                            else return "User";
+                        }
                     },
                     {
                         data: 'status',
@@ -120,6 +167,10 @@
                         searchable: false
                     },
                 ]
+            });
+
+            $('#btn-search').click(function() {
+                $('#dataTable').DataTable().draw(true);
             });
 
             // create new user
@@ -196,7 +247,7 @@
             if (change_confirm) {
                 $.ajax({
                     type: "POST",
-                    url:"{{ url('users') }}"+ '/' +'change/' + user_id,
+                    url: "{{ url('users') }}" + '/' + 'change/' + user_id,
                     success: function(data) {
                         table.draw(true);
                     },
@@ -211,8 +262,8 @@
 
 
 
-    <script src="https://code.jquery.com/jquery-3.5.0.js"
-        integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js" integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
@@ -220,7 +271,8 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
-    {{-- <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script> --}}
+    {{-- <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js">
+    </script> --}}
 
 
 @endsection

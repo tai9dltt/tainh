@@ -17,6 +17,22 @@ class UsersController extends Controller
         $users = User::latest()->get();
 
         if ($request->ajax()) {
+
+            $query = User::query();
+            $from_date = (!empty($_GET["from_date"])) ? ($_GET["from_date"]) : ('');
+            $to_date = (!empty($_GET["to_date"])) ? ($_GET["to_date"]) : ('');
+
+
+            if ($from_date && $to_date) {
+
+                $from_date = date('Y-m-d', strtotime($from_date));
+                $to_date = date('Y-m-d', strtotime($to_date));
+
+                $query->whereRaw("date(users.created_at) >= '" . $from_date . "' AND date(users.created_at) <= '" . $to_date . "'");
+            }
+            $users = $query->select('*');
+
+
             return Datatables::of($users)
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
@@ -44,7 +60,7 @@ class UsersController extends Controller
         ], [
             'name' => $request->name,
             'email' => $request->email,
-            'password'=> $request->password,
+            'password' => $request->password,
             'role_id' => $request->role
         ]);
 
@@ -65,15 +81,13 @@ class UsersController extends Controller
 
     public function changeStatus($id)
     {
-        // $user_id = $request->get('user_id');
-        
         $user = User::find($id);
         if (empty($user)) {
             return response()->json([
                 'success' => false,
-                'message' => 'Item not found! ???? ' ,
+                'message' => 'Item not found! ???? ',
 
-                
+
             ], 404);
         } else {
             if ($user->status == 1 || $user->status == 0) {
@@ -91,7 +105,7 @@ class UsersController extends Controller
                 ], 404);
             }
         }
-        
+
         return response()->json(['success' => 'Status change successfully.']);
     }
 
